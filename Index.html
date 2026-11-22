@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องอบไม้ยางพารา — Southern Star</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1419;--surface:#1a2232;--surface2:#223048;--border:#2d4060;
+  --accent:#f5a623;--accent2:#4fc3f7;--green:#4caf50;--red:#ef5350;
+  --orange:#ff9800;--yellow:#ffeb3b;--text:#e8edf3;--text2:#8fa5c0;
+  --text3:#4d6480;--in-bg:#253d5b;--radius:8px;
+  --mono:'IBM Plex Mono',monospace;--sans:'Sarabun',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#0d1f35,#1a3a5c);border-bottom:2px solid var(--accent);
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.header h1{font-size:16px;font-weight:700;color:var(--accent)}
+.header .sub{font-size:11px;color:var(--text2);margin-top:2px}
+.stat-pill{background:var(--surface2);border:1px solid var(--border);border-radius:20px;
+  padding:4px 12px;font-size:11px;color:var(--text2)}
+.stat-pill span{color:var(--accent);font-weight:700;font-family:var(--mono)}
+.stat-pill span.danger{color:var(--red)}
+
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;overflow-x:auto}
+.tab{padding:10px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);
+  border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+.content{padding:16px;max-width:1400px;margin:0 auto}
+.pane{display:none}.pane.active{display:block}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;margin-bottom:16px}
+.card-title{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:14px;
+  padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.fg.w{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:11px;color:var(--text2);font-weight:600}
+.field input,.field select{background:var(--in-bg);border:1px solid var(--border);border-radius:5px;
+  color:var(--text);padding:7px 10px;font-family:var(--sans);font-size:13px;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(79,195,247,.15)}
+.field input[type=number]{font-family:var(--mono)}
+.calc{background:#1a2e1a;border:1px solid #2d5c2d;border-radius:5px;padding:7px 10px;
+  font-family:var(--mono);font-size:13px;color:var(--green);min-height:33px}
+.hint{font-size:10px;color:var(--text3)}
+
+/* size rows in entry-in */
+.size-row{background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:12px;margin-bottom:8px;position:relative}
+.size-row .sr-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.size-row .sr-label{font-weight:700;color:var(--yellow);font-size:13px;font-family:var(--mono)}
+.size-row .sr-target{font-size:11px;color:var(--text2)}
+.size-row .grade-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.grade-row-item{display:flex;flex-direction:column;gap:3px}
+.grade-row-item label{font-size:10px;color:var(--text3);font-weight:600}
+.grade-row-item input{background:#1a2e45;border:1px solid var(--border);border-radius:4px;
+  color:var(--text);padding:5px 8px;font-family:var(--mono);font-size:12px;outline:none}
+.grade-row-item input:focus{border-color:var(--accent2)}
+.btn-rm-size{position:absolute;top:8px;right:8px;background:none;border:none;
+  color:var(--text3);cursor:pointer;font-size:16px;padding:2px 6px}
+.btn-rm-size:hover{color:var(--red)}
+
+.btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btn{padding:7px 18px;border-radius:6px;border:none;font-family:var(--sans);
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--accent);color:#111}
+.btn-primary:hover{background:#f0b040;transform:translateY(-1px)}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{background:#43a047}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2)}
+.btn-sm{padding:4px 12px;font-size:11px}
+.btn-add{background:var(--surface2);border:1px dashed var(--border);color:var(--accent2);
+  border-radius:6px;padding:8px 14px;cursor:pointer;font-size:12px;font-family:var(--sans);
+  font-weight:600;transition:all .2s;width:100%;margin-top:4px}
+.btn-add:hover{border-color:var(--accent2);background:rgba(79,195,247,.08)}
+
+/* kpi */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.kpi-label{font-size:10px;color:var(--text2);font-weight:600;margin-bottom:5px}
+.kpi-val{font-size:20px;font-weight:700;font-family:var(--mono)}
+.kpi-sub{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* room grid */
+.room-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:5px}
+.room-box{background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:7px 5px;text-align:center;font-size:11px;cursor:pointer;transition:all .15s;position:relative}
+.room-box:hover{border-color:var(--accent2)}
+.room-box .rn{font-weight:700;font-family:var(--mono);font-size:13px;margin-bottom:1px}
+.room-box .ri{font-size:9px;color:var(--text2);line-height:1.3}
+.room-empty{opacity:.4}
+.room-drying{border-color:#c8a400!important;background:rgba(200,164,0,.1)}
+.room-drying .rn{color:var(--yellow)}
+.room-done{border-color:var(--orange)!important;background:rgba(255,152,0,.1)}
+.room-done .rn{color:var(--orange)}
+.room-over{border-color:var(--red)!important;background:rgba(239,83,80,.1);animation:pulse 2s infinite}
+.room-over .rn{color:var(--red)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,83,80,0)}50%{box-shadow:0 0 0 4px rgba(239,83,80,.3)}}
+.day-badge{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.5);border-radius:3px;
+  padding:1px 3px;font-size:8px;font-family:var(--mono)}
+
+/* out list */
+.out-room-card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:10px 12px;margin-bottom:8px;display:grid;gap:4px}
+.out-room-card .oc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.out-room-card .oc-kd{font-weight:700;font-size:14px;font-family:var(--mono)}
+.moisture-input{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px}
+.moisture-input input{width:80px;background:var(--in-bg);border:1px solid var(--border);
+  border-radius:5px;color:var(--text);padding:5px 8px;font-family:var(--mono);font-size:13px;outline:none}
+.moisture-input input:focus{border-color:var(--accent2)}
+.moisture-badge{font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:10px}
+.mok{background:rgba(76,175,80,.2);color:#81c784;border:1px solid #2e7d32}
+.mwarn{background:rgba(239,83,80,.2);color:#ef9a9a;border:1px solid #b71c1c}
+
+/* gantt */
+.gantt-wrap{overflow-x:auto}
+.gtable{border-collapse:collapse;font-size:11px;min-width:800px;width:100%}
+.gtable th,.gtable td{border:1px solid var(--border);padding:0;text-align:center;vertical-align:middle}
+.th-room{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 6px;
+  position:sticky;left:0;z-index:2;min-width:36px}
+.th-fac{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 5px;
+  position:sticky;left:36px;z-index:2;min-width:44px}
+.th-day{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 3px;min-width:26px;font-family:var(--mono)}
+.th-day.tcol{background:rgba(245,166,35,.2);color:var(--accent)}
+.td-room{background:var(--surface);color:var(--text2);font-weight:700;font-size:11px;
+  padding:3px 4px;position:sticky;left:0;z-index:1}
+.td-fac{background:var(--surface);color:var(--text3);font-size:10px;padding:3px 4px;
+  position:sticky;left:36px;z-index:1}
+.gc{width:26px;height:24px;cursor:pointer;position:relative}
+.gc:hover{opacity:.8}
+.gc.drying{background:linear-gradient(135deg,#c8a400,#f5c518)}
+.gc.done{background:linear-gradient(135deg,#e65c00,#f9a825)}
+.gc.tcol{border-left:2px solid var(--accent)!important}
+.gc .ct{font-size:7px;color:#111;font-weight:700;line-height:1.2;padding:1px 2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:24px}
+
+/* log table */
+.log-wrap{overflow-x:auto}
+.ltable{border-collapse:collapse;width:100%;font-size:12px}
+.ltable th{background:var(--surface2);color:var(--text2);padding:7px 8px;text-align:center;
+  border:1px solid var(--border);font-size:11px;font-weight:600;white-space:nowrap}
+.ltable td{padding:5px 8px;border:1px solid #1e2d3d;text-align:center;
+  color:var(--text);white-space:nowrap}
+.ltable tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.ltable tr:hover td{background:rgba(79,195,247,.05)}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700}
+.b-drying{background:rgba(245,166,35,.2);color:var(--accent);border:1px solid #8d6e00}
+.b-ok{background:rgba(76,175,80,.2);color:#81c784;border:1px solid #2e7d32}
+.b-warn{background:rgba(239,83,80,.2);color:#ef9a9a;border:1px solid #b71c1c}
+.mono{font-family:var(--mono)}
+.good{color:var(--green)}.warn2{color:var(--orange)}.bad{color:var(--red)}
+
+/* filter row */
+.frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.frow select,.frow input{background:var(--in-bg);border:1px solid var(--border);
+  border-radius:5px;color:var(--text);padding:5px 10px;font-family:var(--sans);font-size:12px;outline:none}
+
+/* legend */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2)}
+.lb{width:13px;height:13px;border-radius:3px}
+
+/* toast */
+.toast-wrap{position:fixed;bottom:16px;right:16px;display:flex;flex-direction:column;gap:6px;z-index:9999}
+.toast{background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+  padding:9px 14px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.4);
+  animation:slin .2s ease;min-width:200px}
+.toast.ok{border-left:4px solid var(--green)}
+.toast.err{border-left:4px solid var(--red)}
+@keyframes slin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+
+.empty-state{text-align:center;padding:32px;color:var(--text3);font-size:13px}
+.divider{height:1px;background:var(--border);margin:12px 0}
+
+/* maintenance */
+.maint-type-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text2);font-size:12px;font-family:var(--sans);
+  cursor:pointer;transition:all .15s;font-weight:600}
+.maint-type-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(245,166,35,.1)}
+.maint-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+  padding:14px;margin-bottom:10px;cursor:pointer;transition:border-color .2s}
+.maint-card:hover{border-color:var(--accent2)}
+.maint-card .mc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.maint-card .mc-title{font-weight:700;font-size:13px}
+.maint-card .mc-meta{font-size:11px;color:var(--text2);display:flex;gap:10px;flex-wrap:wrap}
+.maint-card .mc-desc{font-size:12px;color:var(--text);margin-top:6px;line-height:1.5}
+.maint-card .mc-imgs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.maint-card .mc-imgs img{width:72px;height:72px;object-fit:cover;border-radius:5px;
+  border:1px solid var(--border);cursor:pointer;transition:transform .15s}
+.maint-card .mc-imgs img:hover{transform:scale(1.05)}
+.type-badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700}
+.type-repair{background:rgba(79,195,247,.15);color:var(--accent2);border:1px solid rgba(79,195,247,.3)}
+.type-mold{background:rgba(239,83,80,.15);color:#ef9a9a;border:1px solid rgba(239,83,80,.3)}
+.type-other{background:rgba(255,152,0,.15);color:#ffb74d;border:1px solid rgba(255,152,0,.3)}
+.status-open{background:rgba(239,83,80,.15);color:#ef9a9a;border:1px solid rgba(239,83,80,.3)}
+.status-done{background:rgba(76,175,80,.15);color:#81c784;border:1px solid rgba(76,175,80,.3)}
+.img-preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;
+  display:flex;align-items:center;justify-content:center;cursor:pointer}
+.img-preview-overlay img{max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain}
+.photo-dropzone{border:2px dashed var(--border);border-radius:8px;padding:16px;
+  text-align:center;color:var(--text3);font-size:12px;cursor:pointer;transition:all .2s;
+  background:var(--in-bg)}
+.photo-dropzone:hover{border-color:var(--accent2);color:var(--accent2)}
+.photo-thumb-wrap{position:relative;display:inline-block}
+.photo-thumb-wrap .rm-photo{position:absolute;top:-4px;right:-4px;background:var(--red);
+  border:none;border-radius:50%;width:18px;height:18px;color:#fff;font-size:11px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+
+/* modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;
+  align-items:center;justify-content:center}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:20px;min-width:320px;max-width:480px;position:relative;max-height:80vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:12px;background:none;border:none;
+  color:var(--text2);font-size:18px;cursor:pointer}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ai-room-card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;
+  padding:10px 12px;margin-bottom:8px}
+.ai-room-card .ar-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ai-room-card .ar-sizes{font-size:11px;color:var(--text2);line-height:1.8}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header h1" style="font-size:16px;font-weight:700;color:var(--accent)">🏭 ห้องอบไม้ยางพารา</div>
+    <div class="sub">Southern Star Parawood Co., Ltd.</div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <div class="stat-pill">อบอยู่ <span id="hd-drying">0</span> ห้อง</div>
+    <div class="stat-pill">เกินเป้า <span class="danger" id="hd-over">0</span> ห้อง</div>
+    <div class="stat-pill" id="hd-date"></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview',this)">📊 ภาพรวม</div>
+  <div class="tab" onclick="switchTab('entry-in',this)">➕ ไม้เข้าห้อง</div>
+  <div class="tab" onclick="switchTab('entry-out',this)">✅ ไม้ออกห้อง</div>
+  <div class="tab" onclick="switchTab('gantt',this)">📅 Gantt</div>
+  <div class="tab" onclick="switchTab('log',this)">📋 ประวัติ</div>
+  <div class="tab" onclick="switchTab('maint',this)">🔧 บำรุงรักษา</div>
+</div>
+
+<div class="content">
+
+<!-- ══ OVERVIEW ══ -->
+<div id="pane-overview" class="pane active">
+  <div class="kpi-grid" id="kpi-grid"></div>
+  <div class="card">
+    <div class="card-title">🏠 สถานะห้องอบ 33 ห้อง
+      <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:auto">คลิกดูรายละเอียด</span>
+    </div>
+    <div class="legend">
+      <div class="li"><div class="lb" style="background:var(--surface);border:1px solid var(--border)"></div>ว่าง</div>
+      <div class="li"><div class="lb" style="background:#c8a40099"></div>กำลังอบ</div>
+      <div class="li"><div class="lb" style="background:#ff980099"></div>ออกแล้ว (วันนี้)</div>
+      <div class="li"><div class="lb" style="background:#ef535099"></div>เกินเป้า</div>
+    </div>
+    <div class="room-grid" id="room-grid"></div>
+  </div>
+</div>
+
+<!-- ══ QUICK ENTRY MODAL ══ -->
+<div class="modal-bg" id="ai-modal" style="display:none">
+  <div class="modal-box" style="max-width:520px;width:95vw">
+    <button class="modal-close" onclick="closeAIModal()">✕</button>
+    <div style="font-weight:700;color:var(--accent);font-size:14px;margin-bottom:6px">⚡ กรอกข้อมูลเร็ว (หลายห้องพร้อมกัน)</div>
+    <div style="font-size:11px;color:var(--text2);margin-bottom:12px;line-height:1.6">
+      พิมพ์ข้อความตามรูปแบบ — 1 บรรทัดต่อ 1 ขนาด:<br>
+      <span style="color:var(--accent2);font-family:var(--mono)">KD[ห้อง] [วัน]/[เดือน]/[ปี] [ขนาด] [เกรด][PL] ...</span><br>
+      <span style="color:var(--text3)">ตัวอย่าง:</span><br>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--yellow)">KD30 4/6/69 5/8 AB60PL<br>KD11 4/6/69 4/8 ABC16PL C2PL<br>KD11 4/6/69 5/8 AB23PL BC19PL C6PL</span>
+    </div>
+
+    <textarea id="ai-text-input" rows="7"
+      placeholder="KD30 4/6/69 5/8 AB60PL&#10;KD11 4/6/69 4/8 ABC16PL C2PL&#10;KD11 4/6/69 5/8 AB23PL BC19PL C6PL"
+      style="width:100%;background:var(--in-bg);border:1px solid var(--border);border-radius:6px;
+      color:var(--text);padding:10px;font-family:var(--mono);font-size:13px;outline:none;resize:vertical"></textarea>
+
+    <!-- result area -->
+    <div id="ai-result" style="margin-top:12px;display:none">
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:600">ผลที่อ่านได้ — เลือกห้องที่ต้องการบันทึก:</div>
+      <div id="ai-result-list"></div>
+    </div>
+
+    <div class="btn-row" style="margin-top:12px">
+      <button class="btn btn-primary" onclick="runTextParse()">⚡ อ่านข้อมูล</button>
+      <button class="btn btn-ghost" onclick="closeAIModal()">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ENTRY IN ══ -->
+<div id="pane-entry-in" class="pane">
+  <div class="card">
+    <div class="card-title">➕ บันทึกไม้เข้าห้องอบ
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto;border-color:var(--accent2);color:var(--accent2)" onclick="openAIModal()">⚡ กรอกข้อมูลเร็ว</button>
+    </div>
+
+    <!-- header info -->
+    <div class="fg" style="margin-bottom:14px">
+      <div class="field">
+        <label>วันที่เข้า *</label>
+        <input type="date" id="in-date">
+      </div>
+      <div class="field">
+        <label>ห้องที่ (KD) *</label>
+        <select id="in-room" onchange="onInRoomChange()">
+          <option value="">-- เลือกห้อง --</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>จำนวนพาเลทรวม</label>
+        <input type="number" id="in-pallet-total" placeholder="ปกติ ≤60" min="0" max="100">
+      </div>
+      <div class="field">
+        <label>หมายเหตุ</label>
+        <input type="text" id="in-note" placeholder="Clone 24, ไม้2, ...">
+      </div>
+    </div>
+
+    <!-- size/grade rows -->
+    <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px">
+      ขนาดและเกรดไม้ที่เข้า (เพิ่มได้หลายขนาด)
+    </div>
+    <div id="size-rows-container"></div>
+    <button class="btn-add" onclick="addSizeRow()">+ เพิ่มขนาด/เกรด</button>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="saveIn()">💾 บันทึกไม้เข้า</button>
+      <button class="btn btn-ghost" onclick="clearInForm()">ล้างฟอร์ม</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔥 ห้องที่กำลังอบทั้งหมด</div>
+    <div id="drying-overview"></div>
+  </div>
+</div>
+
+<!-- ══ ENTRY OUT ══ -->
+<div id="pane-entry-out" class="pane">
+  <div class="card">
+    <div class="card-title">✅ บันทึกไม้ออกห้อง</div>
+
+    <div class="fg" style="margin-bottom:14px">
+      <div class="field">
+        <label>วันที่ออก *</label>
+        <input type="date" id="out-date" oninput="renderOutRooms()">
+      </div>
+      <div class="field" style="align-self:end">
+        <button class="btn btn-success" onclick="saveAllOut()">✅ บันทึกทั้งหมด</button>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--text2);margin-bottom:10px">
+      กรอกความชื้น (%) ให้แต่ละห้องที่ออกวันนี้ — เกณฑ์ผ่าน ≤ 7%
+    </div>
+    <div id="out-rooms-list"></div>
+
+    <div class="divider"></div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:8px">
+      📦 บันทึกผลผลิตเกรดไม้ (กรอกทีหลังได้ — คลิกห้องในประวัติ)
+    </div>
+    <div id="out-grade-section"></div>
+  </div>
+</div>
+
+<!-- ══ GANTT ══ -->
+<div id="pane-gantt" class="pane">
+  <div class="card">
+    <div class="card-title">📅 แผนภูมิห้องอบ (Gantt)</div>
+    <div class="frow">
+      <label style="color:var(--text2);font-size:12px">เดือน:</label>
+      <select id="gantt-month" onchange="renderGantt()"></select>
+      <label style="color:var(--text2);font-size:12px">ปี:</label>
+      <select id="gantt-year" onchange="renderGantt()"></select>
+    </div>
+    <div class="legend">
+      <div class="li"><div class="lb" style="background:linear-gradient(135deg,#c8a400,#f5c518)"></div>กำลังอบ</div>
+      <div class="li"><div class="lb" style="background:linear-gradient(135deg,#e65c00,#f9a825)"></div>ออกแล้ว</div>
+    </div>
+    <div class="gantt-wrap" id="gantt-wrap"><div class="empty-state">ยังไม่มีข้อมูล</div></div>
+  </div>
+</div>
+
+<!-- ══ LOG ══ -->
+<div id="pane-log" class="pane">
+  <div class="card">
+    <div class="card-title">📋 ประวัติรอบอบ</div>
+    <div class="frow">
+      <input type="text" id="log-search" placeholder="ค้นหา..." oninput="renderLog()" style="width:160px">
+      <select id="log-fsize" onchange="renderLog()">
+        <option value="">ทุกขนาด</option>
+        <option>5/8</option><option>4/8</option><option>3/8</option>
+      </select>
+      <select id="log-fstatus" onchange="renderLog()">
+        <option value="">ทุกสถานะ</option>
+        <option value="drying">กำลังอบ</option>
+        <option value="done">เสร็จแล้ว</option>
+      </select>
+      <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇️ CSV</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇️ Backup</button>
+      <label class="btn btn-ghost btn-sm" style="cursor:pointer">📂 Import <input type="file" accept=".json" onchange="importJSON(event)" style="display:none"></label>
+    </div>
+    <div class="log-wrap">
+      <table class="ltable">
+        <thead><tr>
+          <th>รอบ</th><th>KD</th><th>วันเข้า</th><th>วันออก</th>
+          <th>วันอบ</th><th>เป้า</th><th>+/-</th>
+          <th>ขนาด</th><th>cuf เข้า</th><th>AB</th><th>ABC</th><th>BC</th><th>C</th>
+          <th>รวมออก</th><th>%AB</th><th>Dg%</th>
+          <th>ชื้น%</th><th>พาเลท</th><th>สถานะ</th><th>หมายเหตุ</th><th>แก้ไข</th>
+        </tr></thead>
+        <tbody id="log-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- ══ MAINTENANCE PANE ══ -->
+<div id="pane-maint" class="pane" style="display:none">
+<div class="content" style="max-width:1400px;margin:0 auto;padding:16px">
+
+  <!-- Form -->
+  <div class="card">
+    <div class="card-title">➕ บันทึกรายการใหม่</div>
+
+    <!-- Type selector -->
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+      <button class="maint-type-btn active" id="mtype-repair"   onclick="setMType('repair',this)">🔧 ซ่อมบำรุง</button>
+      <button class="maint-type-btn"        id="mtype-mold"     onclick="setMType('mold',this)">🍄 ไม้ขึ้นรา</button>
+      <button class="maint-type-btn"        id="mtype-other"    onclick="setMType('other',this)">📌 อื่นๆ</button>
+    </div>
+
+    <div class="fg w" style="margin-bottom:12px">
+      <div class="field">
+        <label>วันที่ *</label>
+        <input type="date" id="m-date">
+      </div>
+      <div class="field" id="m-room-field">
+        <label>ห้อง KD (ถ้ามี)</label>
+        <select id="m-room">
+          <option value="">— ไม่ระบุ —</option>
+          ${Array.from({length:33},(_,i)=>`<option value="${i+1}">KD ${i+1}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label>ผู้แจ้ง / ผู้รับผิดชอบ</label>
+        <input type="text" id="m-person" placeholder="ชื่อ...">
+      </div>
+      <div class="field">
+        <label>สถานะ</label>
+        <select id="m-status">
+          <option value="open">🔴 รอดำเนินการ</option>
+          <option value="done">🟢 เสร็จแล้ว</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom:10px">
+      <label>หัวข้อ / รายละเอียด *</label>
+      <input type="text" id="m-title" placeholder="เช่น พัดลมห้อง KD5 เสีย, ไม้รา 3 พาเลท ห้อง KD12...">
+    </div>
+    <div class="field" style="margin-bottom:10px">
+      <label>รายละเอียดเพิ่มเติม</label>
+      <textarea id="m-desc" rows="3" placeholder="อธิบายปัญหา วิธีแก้ไข หรือข้อสังเกต..."
+        style="background:var(--in-bg);border:1px solid var(--border);border-radius:5px;
+        color:var(--text);padding:8px 10px;font-family:var(--sans);font-size:13px;
+        outline:none;resize:vertical;width:100%"></textarea>
+    </div>
+
+    <!-- Photo upload -->
+    <div class="field" style="margin-bottom:12px">
+      <label>รูปภาพ (เลือกได้หลายรูป)</label>
+      <input type="file" id="m-photos" multiple accept="image/*" style="display:none" onchange="handlePhotos(event)">
+      <button onclick="document.getElementById('m-photos').click()"
+        style="width:100%;padding:16px;background:var(--in-bg);border:2px dashed var(--border);
+        border-radius:8px;color:var(--text2);font-size:14px;font-family:var(--sans);cursor:pointer">
+        📷 แตะเพื่อเลือกรูป (เลือกได้หลายรูป)
+      </button>
+      <div id="photo-preview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="saveMaint()">💾 บันทึก</button>
+      <button class="btn btn-ghost" onclick="clearMaintForm()">ล้างฟอร์ม</button>
+    </div>
+  </div>
+
+  <!-- Filter + List -->
+  <div class="card">
+    <div class="card-title">📋 รายการทั้งหมด
+      <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:auto" id="maint-count"></span>
+    </div>
+    <div class="frow" style="margin-bottom:12px">
+      <button class="maint-type-btn active" id="mf-all"    onclick="setMFilter('all',this)">ทั้งหมด</button>
+      <button class="maint-type-btn"        id="mf-repair" onclick="setMFilter('repair',this)">🔧 ซ่อมบำรุง</button>
+      <button class="maint-type-btn"        id="mf-mold"   onclick="setMFilter('mold',this)">🍄 ราขึ้น</button>
+      <button class="maint-type-btn"        id="mf-other"  onclick="setMFilter('other',this)">📌 อื่นๆ</button>
+      <button class="maint-type-btn"        id="mf-open"   onclick="setMFilter('open',this)">🔴 รอดำเนินการ</button>
+      <input type="text" id="m-search" placeholder="ค้นหา..." oninput="renderMaint()"
+        style="background:var(--in-bg);border:1px solid var(--border);border-radius:5px;
+        color:var(--text);padding:5px 10px;font-family:var(--sans);font-size:12px;outline:none;width:140px">
+    </div>
+    <div id="maint-list"></div>
+  </div>
+
+</div>
+</div>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<!-- Edit grade modal -->
+<div class="modal-bg" id="grade-modal" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGradeModal()">✕</button>
+    <div id="grade-modal-content"></div>
+  </div>
+</div>
+
+<!-- Room detail modal -->
+<div class="modal-bg" id="room-modal" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeRoomModal()">✕</button>
+    <div id="room-modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════
+// CONSTANTS
+// ══════════════════════════════
+const ROOMS = 33;
+const TARGETS = {'5/8':7,'4/8':4,'3/8':3};
+const FAC = r => r <= 20 ? 'Star1' : 'Star2';
+const SIZES = ['5/8','4/8','3/8'];
+const GRADES = ['AB','ABC','BC','C'];
+
+// ══════════════════════════════
+// DATA
+// ══════════════════════════════
+function load(){try{return JSON.parse(localStorage.getItem('kd_batches')||'[]')}catch{return[]}}
+function save(){localStorage.setItem('kd_batches',JSON.stringify(batches))}
+let batches = load();
+let nextId = batches.length ? Math.max(...batches.map(b=>b.id))+1 : 1;
+
+// batch schema:
+// {id, room, factory, dateIn, dateOut, pallet, note, status('drying'|'done'),
+//  sizes:[{size,ab,abc,bc,c,cufIn}], moisture, actualDays, targetDays}
+// targetDays = min target across sizes (or max — use 5/8 if present, else max)
+
+function getDrying(){ return batches.filter(b=>b.status==='drying') }
+function getBatch(id){ return batches.find(b=>b.id===id) }
+function roomBatch(r){ return batches.find(b=>b.room==r && b.status==='drying') }
+
+// ══════════════════════════════
+// UTILS
+// ══════════════════════════════
+const today = ()=>new Date().toISOString().split('T')[0];
+function ds(d){
+  if(!d) return '—';
+  const [y,m,day]=d.split('-');
+  return `${day}/${m}/${+y+543}`;
+}
+function daysBetween(a,b){
+  if(!a||!b) return null;
+  return Math.round((new Date(b)-new Date(a))/86400000);
+}
+function dft(a){ return daysBetween(a,today()) }
+function fn(n,dec=1){
+  if(n==null||n===''||isNaN(n)) return '—';
+  return Number(n).toLocaleString('th-TH',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+function calcBatchTotals(b){
+  let cufIn=0,ab=0,abc=0,bc=0,c=0;
+  (b.sizes||[]).forEach(s=>{
+    cufIn += +s.cufIn||0;
+    ab    += +s.ab||0;
+    abc   += +s.abc||0;
+    bc    += +s.bc||0;
+    c     += +s.c||0;
+  });
+  const out=ab+abc+bc+c;
+  const pctAB=out>0?ab/out*100:null;
+  const dg=cufIn>0?((cufIn-ab)/cufIn*100):null;
+  return{cufIn,ab,abc,bc,c,out,pctAB,dg};
+}
+function calcTargetDays(sizes){
+  if(!sizes||!sizes.length) return 7;
+  if(sizes.some(s=>s.size==='5/8')) return 7;
+  if(sizes.some(s=>s.size==='4/8')) return 4;
+  return 3;
+}
+
+// ══════════════════════════════
+// TABS
+// ══════════════════════════════
+function switchTab(tab,el){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pane-'+tab).classList.add('active');
+  el.classList.add('active');
+  if(tab==='overview') renderOverview();
+  if(tab==='entry-in') renderEntryIn();
+  if(tab==='entry-out') renderEntryOut();
+  if(tab==='gantt') renderGantt();
+  if(tab==='log') renderLog();
+}
+
+// ══════════════════════════════
+// OVERVIEW
+// ══════════════════════════════
+function renderOverview(){
+  const drying=getDrying();
+  const over=drying.filter(b=>dft(b.dateIn)>b.targetDays);
+  document.getElementById('hd-drying').textContent=drying.length;
+  document.getElementById('hd-over').textContent=over.length;
+
+  const now=new Date();
+  const doneMonth=batches.filter(b=>{
+    if(!b.dateOut) return false;
+    const d=new Date(b.dateOut);
+    return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+  });
+  let tCufIn=0,tAB=0;
+  doneMonth.forEach(b=>{const t=calcBatchTotals(b);tCufIn+=t.cufIn;tAB+=t.ab});
+  const pAB=tCufIn>0?tAB/tCufIn*100:0;
+  const avgDays=doneMonth.length?doneMonth.reduce((s,b)=>s+(b.actualDays||0),0)/doneMonth.length:0;
+
+  document.getElementById('kpi-grid').innerHTML=[
+    ['กำลังอบ',drying.length+' ห้อง',`จาก ${ROOMS} ห้อง`,'var(--accent)'],
+    ['เกินเป้า',over.length+' ห้อง','ต้องตรวจสอบ','var(--red)'],
+    ['ห้องว่าง',(ROOMS-drying.length)+' ห้อง','พร้อมรับไม้','var(--green)'],
+    ['รอบเดือนนี้',doneMonth.length+' รอบ','เสร็จสมบูรณ์','var(--accent2)'],
+
+    ['วันอบเฉลี่ย',avgDays>0?avgDays.toFixed(1)+' วัน':'—','','var(--accent2)'],
+    ['รวมทุกรอบ',batches.length+' รอบ','','var(--text2)'],
+  ].map(([l,v,s,c])=>`<div class="kpi-card"><div class="kpi-label">${l}</div>
+    <div class="kpi-val" style="color:${c}">${v}</div>
+    <div class="kpi-sub">${s}</div></div>`).join('');
+
+  let html='';
+  for(let r=1;r<=ROOMS;r++){
+    const b=roomBatch(r);
+    if(!b){
+      html+=`<div class="room-box room-empty" onclick="showRoomModal(${r})">
+        <div class="rn" style="color:var(--text3)">${r}</div>
+        <div class="ri">${FAC(r).replace('Star','S')}<br>ว่าง</div></div>`;
+    } else {
+      const days=dft(b.dateIn);
+      const over=days>b.targetDays;
+      const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
+      html+=`<div class="room-box ${over?'room-over':'room-drying'}" onclick="showRoomModal(${r})">
+        <div class="day-badge" style="color:${over?'var(--red)':'var(--yellow)'}">${days}ว</div>
+        <div class="rn">${r}</div>
+        <div class="ri">${szs||'—'}</div></div>`;
+    }
+  }
+  document.getElementById('room-grid').innerHTML=html;
+}
+
+function showRoomModal(r){
+  const b=roomBatch(r);
+  let html=`<div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px">KD ${r}</div>`;
+  if(!b){
+    html+=`<div style="color:var(--green);text-align:center;padding:20px;font-size:14px">✅ ว่าง พร้อมรับไม้</div>`;
+  } else {
+    const days=dft(b.dateIn);
+    const diff=days-b.targetDays;
+    const t=calcBatchTotals(b);
+    html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+      <div><div style="color:var(--text2);font-size:10px">วันเข้า</div><div class="mono">${ds(b.dateIn)}</div></div>
+      <div><div style="color:var(--text2);font-size:10px">อบมา</div><div class="mono" style="color:${diff>0?'var(--red)':'var(--yellow)'}">${days} วัน</div></div>
+      <div><div style="color:var(--text2);font-size:10px">เป้า</div><div class="mono">${b.targetDays} วัน ${diff>0?'<span style="color:var(--red)">+'+diff+'</span>':diff<0?'<span style="color:var(--green)">'+diff+'</span>':'✅'}</div></div>
+      <div><div style="color:var(--text2);font-size:10px">cuf เข้า</div><div class="mono">${fn(t.cufIn)}</div></div>
+      <div><div style="color:var(--text2);font-size:10px">พาเลท</div><div class="mono">${b.pallet||'—'}</div></div>
+    </div>`;
+    if(b.sizes&&b.sizes.length){
+      html+=`<div style="margin-top:10px;font-size:11px;color:var(--text2);margin-bottom:6px">ขนาดที่อบ:</div>`;
+      b.sizes.forEach(s=>{
+        html+=`<div style="font-size:12px;font-family:var(--mono);color:var(--text)">${s.size}" — cuf ${fn(s.cufIn)}</div>`;
+      });
+    }
+    if(b.note) html+=`<div style="margin-top:8px;font-size:11px;color:var(--text3)">📝 ${b.note}</div>`;
+  }
+  document.getElementById('room-modal-content').innerHTML=html;
+  document.getElementById('room-modal').style.display='flex';
+}
+function closeRoomModal(){document.getElementById('room-modal').style.display='none'}
+
+// ══════════════════════════════
+// ENTRY IN
+// ══════════════════════════════
+let sizeRowCount=0;
+function renderEntryIn(){
+  const drying=new Set(getDrying().map(b=>b.room));
+  const sel=document.getElementById('in-room');
+  sel.innerHTML='<option value="">-- เลือกห้อง --</option>';
+  for(let r=1;r<=ROOMS;r++){
+    if(!drying.has(r)){
+      const o=document.createElement('option');
+      o.value=r; o.textContent=`KD ${r} (${FAC(r)})`;
+      sel.appendChild(o);
+    }
+  }
+  if(!document.getElementById('size-rows-container').children.length) addSizeRow();
+  renderDryingOverview();
+}
+
+function onInRoomChange(){
+  const r=parseInt(document.getElementById('in-room').value);
+}
+
+
+function addSizeRow(defaultSize='5/8'){
+  const id='sr-'+Date.now();
+  const target=TARGETS[defaultSize]||7;
+  const div=document.createElement('div');
+  div.className='size-row'; div.id=id;
+  div.innerHTML=`
+    <div class="sr-head">
+      <select class="sr-size" onchange="onSizeChange(this,'${id}')">
+        ${SIZES.map(s=>`<option value="${s}" ${s===defaultSize?'selected':''}>${s}"</option>`).join('')}
+      </select>
+      <span class="sr-label">${defaultSize}"</span>
+      <span class="sr-target" id="tgt-${id}">เป้า ${target} วัน</span>
+    </div>
+    <div class="grade-rows">
+      ${GRADES.map(g=>`
+        <div class="grade-row-item">
+          <label>${g} (พาเลท)</label>
+          <input type="number" class="gr-${g.toLowerCase()}" placeholder="0" min="0" step="1">
+        </div>`).join('')}
+      <div class="grade-row-item">
+        <label>cuf เข้า</label>
+        <input type="number" class="gr-cufin" placeholder="0.0" step="0.1" min="0">
+      </div>
+    </div>
+    <button class="btn-rm-size" onclick="removeSizeRow('${id}')" title="ลบ">✕</button>`;
+  document.getElementById('size-rows-container').appendChild(div);
+  sizeRowCount++;
+}
+
+function onSizeChange(sel,id){
+  const sz=sel.value;
+  sel.parentElement.querySelector('.sr-label').textContent=sz+'"';
+  const t=TARGETS[sz]||7;
+  document.getElementById('tgt-'+id).textContent='เป้า '+t+' วัน';
+}
+
+function removeSizeRow(id){
+  const el=document.getElementById(id);
+  if(el) el.remove();
+}
+
+function collectSizeRows(){
+  const rows=[];
+  document.querySelectorAll('.size-row').forEach(div=>{
+    const size=div.querySelector('.sr-size').value;
+    const ab=parseFloat(div.querySelector('.gr-ab').value)||0;
+    const abc=parseFloat(div.querySelector('.gr-abc').value)||0;
+    const bc=parseFloat(div.querySelector('.gr-bc').value)||0;
+    const c=parseFloat(div.querySelector('.gr-c').value)||0;
+    const cufIn=parseFloat(div.querySelector('.gr-cufin').value)||0;
+    rows.push({size,ab,abc,bc,c,cufIn});
+  });
+  return rows;
+}
+
+function saveIn(){
+  const dateIn=document.getElementById('in-date').value;
+  const room=parseInt(document.getElementById('in-room').value);
+  const factory='Southern Star';
+  const pallet=document.getElementById('in-pallet-total').value;
+  const note=document.getElementById('in-note').value;
+  const sizes=collectSizeRows();
+
+  if(!dateIn) return toast('กรุณาเลือกวันที่','err');
+  if(!room) return toast('กรุณาเลือกห้อง','err');
+  if(!sizes.length) return toast('กรุณาเพิ่มขนาดไม้อย่างน้อย 1 รายการ','err');
+
+  const targetDays=calcTargetDays(sizes);
+  const b={
+    id:nextId++, room, factory, dateIn, dateOut:null,
+    pallet:pallet||'', note, status:'drying',
+    sizes, moisture:null, actualDays:null, targetDays
+  };
+  batches.push(b); save();
+  toast(`✅ KD ${room} เข้าอบแล้ว (เป้า ${targetDays} วัน)`,'ok');
+  clearInForm(); renderEntryIn(); renderOverview();
+}
+
+function clearInForm(){
+  document.getElementById('in-date').value=today();
+  document.getElementById('in-room').value='';
+  document.getElementById('in-pallet-total').value='';
+  document.getElementById('in-note').value='';
+  document.getElementById('size-rows-container').innerHTML='';
+  addSizeRow();
+}
+
+function renderDryingOverview(){
+  const drying=getDrying().sort((a,b)=>a.dateIn.localeCompare(b.dateIn));
+  const el=document.getElementById('drying-overview');
+  if(!drying.length){el.innerHTML='<div class="empty-state">ยังไม่มีห้องที่กำลังอบ</div>';return}
+  el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">`+
+    drying.map(b=>{
+      const days=dft(b.dateIn);
+      const over=days>b.targetDays;
+      const szs=[...new Set(b.sizes.map(s=>s.size))].join(', ');
+      const t=calcBatchTotals(b);
+      return `<div style="background:var(--surface2);border:1px solid ${over?'var(--red)':'var(--border)'};border-radius:6px;padding:10px">
+        <div style="font-weight:700;color:${over?'var(--red)':'var(--yellow)'}">KD ${b.room} <span style="font-size:10px;color:var(--text2)">${b.factory}</span></div>
+        <div style="font-size:11px;color:var(--text2)">${szs}" | ${fn(t.cufIn)} cuf | ${b.pallet||'—'} PL</div>
+        <div style="font-size:11px;color:var(--text2)">เข้า: ${ds(b.dateIn)}</div>
+        <div style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days} วัน / เป้า ${b.targetDays} วัน ${over?'⚠️':''}</div>
+      </div>`;
+    }).join('')+'</div>';
+}
+
+// ══════════════════════════════
+// ENTRY OUT
+// ══════════════════════════════
+// Each drying room gets a card with moisture input
+// Grade data can be filled in from log edit
+
+function renderEntryOut(){
+  document.getElementById('out-date').value=document.getElementById('out-date').value||today();
+  renderOutRooms();
+}
+
+function renderOutRooms(){
+  const drying=getDrying().sort((a,b)=>a.dateIn.localeCompare(b.dateIn));
+  const outDate=document.getElementById('out-date').value;
+  const el=document.getElementById('out-rooms-list');
+
+  if(!drying.length){el.innerHTML='<div class="empty-state">ไม่มีห้องที่กำลังอบ</div>';return}
+
+  // build checkboxes + moisture
+  el.innerHTML=drying.map(b=>{
+    const days=outDate?daysBetween(b.dateIn,outDate):dft(b.dateIn);
+    const over=days>b.targetDays;
+    const szs=[...new Set(b.sizes.map(s=>s.size))].join(', ');
+    const t=calcBatchTotals(b);
+    return `<div class="out-room-card" id="orc-${b.id}">
+      <div class="oc-head">
+        <input type="checkbox" id="chk-${b.id}" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
+        <span class="oc-kd" style="color:${over?'var(--red)':'var(--yellow)'}">KD ${b.room}</span>
+        <span style="font-size:11px;color:var(--text2)">${szs}" | ${fn(t.cufIn)} cuf</span>
+        <span style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days} วัน / เป้า ${b.targetDays} วัน ${over?'⚠️':''}</span>
+      </div>
+      <div class="moisture-input">
+        <label style="font-size:11px;color:var(--text2);min-width:80px">ความชื้น (%):</label>
+        <input type="number" id="moist-${b.id}" placeholder="เกณฑ์ ≤7" step="0.1" min="0" max="30" oninput="checkMoisture(${b.id})">
+        <span class="moisture-badge" id="mbadge-${b.id}"></span>
+        <label style="font-size:11px;color:var(--text2);margin-left:8px">หมายเหตุ:</label>
+        <input type="text" id="outnote-${b.id}" placeholder="ไม่บังคับ" style="width:150px;background:var(--in-bg);border:1px solid var(--border);border-radius:5px;color:var(--text);padding:5px 8px;font-family:var(--sans);font-size:12px;outline:none">
+      </div>
+    </div>`;
+  }).join('');
+
+  // Grade section: select which batch to fill grades
+  const gdiv=document.getElementById('out-grade-section');
+  gdiv.innerHTML=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <select id="grade-batch-sel" style="background:var(--in-bg);border:1px solid var(--border);border-radius:5px;color:var(--text);padding:6px 10px;font-family:var(--sans);font-size:12px;outline:none">
+      <option value="">-- เลือกห้องที่จะกรอกเกรด --</option>
+      ${drying.map(b=>`<option value="${b.id}">KD ${b.room} | ${[...new Set(b.sizes.map(s=>s.size))].join('/')+'"'}</option>`).join('')}
+    </select>
+    <button class="btn btn-ghost btn-sm" onclick="openGradeModal()">✏️ กรอกเกรด</button>
+  </div>`;
+}
+
+function checkMoisture(id){
+  const v=parseFloat(document.getElementById('moist-'+id).value);
+  const badge=document.getElementById('mbadge-'+id);
+  if(isNaN(v)){badge.textContent='';badge.className='moisture-badge';return}
+  if(v<=7){badge.textContent='✅ ผ่าน';badge.className='moisture-badge mok'}
+  else{badge.textContent=`⚠️ ${v}% สูงเกิน`;badge.className='moisture-badge mwarn'}
+}
+
+function saveAllOut(){
+  const outDate=document.getElementById('out-date').value;
+  if(!outDate) return toast('กรุณาเลือกวันที่ออก','err');
+
+  const drying=getDrying();
+  let count=0;
+  drying.forEach(b=>{
+    const chk=document.getElementById('chk-'+b.id);
+    if(!chk||!chk.checked) return;
+    const moist=parseFloat(document.getElementById('moist-'+b.id).value);
+    const note=document.getElementById('outnote-'+b.id)?.value||'';
+    const idx=batches.findIndex(x=>x.id===b.id);
+    batches[idx].dateOut=outDate;
+    batches[idx].moisture=isNaN(moist)?null:moist;
+    batches[idx].status='done';
+    batches[idx].actualDays=daysBetween(b.dateIn,outDate);
+    if(note) batches[idx].note=(batches[idx].note?batches[idx].note+' | ':'')+note;
+    count++;
+    if(!isNaN(moist)&&moist>7) toast(`⚠️ KD ${b.room} ความชื้น ${moist}% เกินเกณฑ์`,'err');
+  });
+
+  if(!count) return toast('กรุณาเลือกห้องที่จะออก (ติ๊ก ✓)','err');
+  save();
+  toast(`✅ บันทึกออก ${count} ห้อง วันที่ ${ds(outDate)}`,'ok');
+  renderEntryOut(); renderOverview();
+}
+
+// ── Grade modal ──
+function openGradeModal(){
+  const id=parseInt(document.getElementById('grade-batch-sel').value);
+  if(!id) return toast('กรุณาเลือกห้องก่อน','err');
+  const b=getBatch(id);
+  if(!b) return;
+  openGradeModalForBatch(b);
+}
+
+function openGradeModalForBatch(b){
+  const t=calcBatchTotals(b);
+  let html=`<div style="font-weight:700;color:var(--accent);margin-bottom:12px">กรอกเกรดไม้ — KD ${b.room} (${ds(b.dateIn)}→${ds(b.dateOut)})</div>`;
+  (b.sizes||[]).forEach((s,si)=>{
+    html+=`<div style="background:var(--surface2);border-radius:6px;padding:10px;margin-bottom:8px">
+      <div style="font-weight:700;color:var(--yellow);margin-bottom:8px">${s.size}"</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        ${GRADES.map(g=>`<div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:3px">${g} (PL)</div>
+          <input type="number" id="gm-${b.id}-${si}-${g.toLowerCase()}" value="${s[g.toLowerCase()]||''}"
+            placeholder="0" min="0" step="1"
+            style="width:100%;background:var(--in-bg);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:5px;font-family:var(--mono);font-size:12px;outline:none">
+        </div>`).join('')}
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:3px">cuf เข้า</div>
+          <input type="number" id="gm-${b.id}-${si}-cufin" value="${s.cufIn||''}"
+            placeholder="0.0" step="0.1" min="0"
+            style="width:100%;background:var(--in-bg);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:5px;font-family:var(--mono);font-size:12px;outline:none">
+        </div>
+      </div>
+    </div>`;
+  });
+  html+=`<div class="btn-row">
+    <button class="btn btn-success" onclick="saveGradeModal(${b.id})">💾 บันทึกเกรด</button>
+    <button class="btn btn-ghost" onclick="closeGradeModal()">ยกเลิก</button>
+  </div>`;
+  document.getElementById('grade-modal-content').innerHTML=html;
+  document.getElementById('grade-modal').style.display='flex';
+}
+
+function saveGradeModal(id){
+  const idx=batches.findIndex(b=>b.id===id);
+  if(idx<0) return;
+  (batches[idx].sizes||[]).forEach((s,si)=>{
+    GRADES.forEach(g=>{
+      const v=parseFloat(document.getElementById(`gm-${id}-${si}-${g.toLowerCase()}`)?.value);
+      s[g.toLowerCase()]=isNaN(v)?0:v;
+    });
+    const cf=parseFloat(document.getElementById(`gm-${id}-${si}-cufin`)?.value);
+    s.cufIn=isNaN(cf)?s.cufIn:cf;
+  });
+  save(); toast('✅ บันทึกเกรดแล้ว','ok');
+  closeGradeModal(); renderLog(); renderOverview();
+}
+function closeGradeModal(){document.getElementById('grade-modal').style.display='none'}
+
+// ══════════════════════════════
+// GANTT
+// ══════════════════════════════
+function renderGantt(){
+  const now=new Date();
+  const ms=document.getElementById('gantt-month');
+  const ys=document.getElementById('gantt-year');
+  if(!ms.options.length){
+    ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
+     'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม']
+      .forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m;ms.appendChild(o)});
+    ms.value=now.getMonth();
+    for(let y=2566;y<=2570;y++){const o=document.createElement('option');o.value=y-543;o.textContent='พ.ศ. '+y;ys.appendChild(o)}
+    ys.value=now.getFullYear();
+  }
+  const month=parseInt(ms.value),year=parseInt(ys.value);
+  const dim=new Date(year,month+1,0).getDate();
+  const td=now.getDate(),tm=now.getMonth(),ty=now.getFullYear();
+  const isCurMonth=tm===month&&ty===year;
+
+  let html=`<table class="gtable"><thead><tr>
+    <th class="th-room" rowspan="2">KD</th>
+`;
+  for(let d=1;d<=dim;d++) html+=`<th class="th-day ${isCurMonth&&d===td?'tcol':''}">${d}</th>`;
+  html+=`</tr></thead><tbody>`;
+
+  for(let r=1;r<=ROOMS;r++){
+    html+=`<tr><td class="td-room">${r}</td>`;
+    for(let d=1;d<=dim;d++){
+      const cd=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const tc=isCurMonth&&d===td?'tcol':'';
+      const b=batches.find(b=>b.room==r&&b.dateIn<=cd&&(b.status==='drying'||(b.dateOut&&b.dateOut>=cd)));
+      if(b){
+        const done=b.status==='done';
+        const szs=[...new Set(b.sizes.map(s=>s.size))].join('/');
+        html+=`<td class="gc ${done?'done':'drying'} ${tc}" title="KD${r}|${szs}&quot;|${ds(b.dateIn)}-${ds(b.dateOut||'?')}"><div class="ct">${szs}</div></td>`;
+      } else {
+        html+=`<td class="gc empty ${tc}"></td>`;
+      }
+    }
+    html+=`</tr>`;
+  }
+  html+=`</tbody></table>`;
+  document.getElementById('gantt-wrap').innerHTML=html;
+}
+
+// ══════════════════════════════
+// LOG
+// ══════════════════════════════
+function renderLog(){
+  const search=document.getElementById('log-search').value.toLowerCase();
+  const fs=document.getElementById('log-fsize').value;
+  const fst=document.getElementById('log-fstatus').value;
+  let data=[...batches].reverse();
+  if(search) data=data.filter(b=>String(b.room).includes(search)||(b.factory||'').toLowerCase().includes(search)||(b.note||'').toLowerCase().includes(search)||(b.sizes||[]).some(s=>s.size.includes(search)));
+  if(fs) data=data.filter(b=>(b.sizes||[]).some(s=>s.size===fs));
+  if(fst) data=data.filter(b=>b.status===fst);
+
+  const tbody=document.getElementById('log-tbody');
+  if(!data.length){tbody.innerHTML='<tr><td colspan="22"><div class="empty-state">ไม่พบข้อมูล</div></td></tr>';return}
+
+  tbody.innerHTML=data.map(b=>{
+    const t=calcBatchTotals(b);
+    const pAB=t.pctAB;
+    const diff=b.actualDays!=null?b.actualDays-b.targetDays:null;
+    const mok=b.moisture==null||b.moisture<=7;
+    const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
+    return `<tr>
+      <td class="mono">${b.id}</td>
+      <td style="font-weight:700">${b.room}</td>
+      <td class="mono">${ds(b.dateIn)}</td>
+      <td class="mono">${ds(b.dateOut)}</td>
+      <td class="mono">${b.actualDays!=null?b.actualDays:'—'}</td>
+      <td class="mono">${b.targetDays}</td>
+      <td class="mono ${diff>0?'bad':diff<0?'good':''}">${diff!=null?(diff>0?'+'+diff:diff<0?diff:'✅'):'—'}</td>
+      <td class="mono">${szs}"</td>
+      <td class="mono">${fn(t.cufIn)}</td>
+      <td class="mono">${t.ab?fn(t.ab):'—'}</td>
+      <td class="mono">${t.abc?fn(t.abc):'—'}</td>
+      <td class="mono">${t.bc?fn(t.bc):'—'}</td>
+      <td class="mono">${t.c?fn(t.c):'—'}</td>
+      <td class="mono">${t.out?fn(t.out):'—'}</td>
+      <td class="mono ${pAB==null?'':pAB>=85?'good':pAB>=70?'warn2':'bad'}">${pAB!=null?pAB.toFixed(1)+'%':'—'}</td>
+      <td class="mono ${t.dg!=null&&t.dg>20?'bad':''}">${t.dg!=null?t.dg.toFixed(1)+'%':'—'}</td>
+      <td class="mono ${!mok?'bad':''}">${b.moisture!=null?b.moisture:'—'}</td>
+      <td class="mono">${b.pallet||'—'}</td>
+      <td>${b.status==='drying'?'<span class="badge b-drying">กำลังอบ</span>':(mok?'<span class="badge b-ok">✅ ผ่าน</span>':'<span class="badge b-warn">⚠️ ชื้นสูง</span>')}</td>
+      <td style="font-size:10px;color:var(--text2);max-width:100px;overflow:hidden;text-overflow:ellipsis">${b.note||'—'}</td>
+      <td><button class="btn btn-ghost btn-sm" onclick="openGradeModalForBatch(getBatch(${b.id}))">✏️</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════════════════════════
+// EXPORT / IMPORT
+// ══════════════════════════════
+function exportCSV(){
+  const h=['รอบ','KD','วันเข้า','วันออก','วันอบ','เป้า','+/-',
+           'ขนาด','cuf เข้า','AB','ABC','BC','C','รวมออก','%AB','Dg%',
+           'ความชื้น%','พาเลท','สถานะ','หมายเหตุ'];
+  const rows=batches.map(b=>{
+    const t=calcBatchTotals(b);
+    const diff=b.actualDays!=null?b.actualDays-b.targetDays:'';
+    const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
+    return [b.id,b.room,b.dateIn,b.dateOut||'',b.actualDays||'',b.targetDays,diff,
+      szs,t.cufIn||'',t.ab||'',t.abc||'',t.bc||'',t.c||'',t.out||'',
+      t.pctAB!=null?t.pctAB.toFixed(1):'',t.dg!=null?t.dg.toFixed(1):'',
+      b.moisture||'',b.pallet||'',b.status,b.note||''];
+  });
+  const csv=[h,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  dl('\uFEFF'+csv,'kiln_'+today()+'.csv','text/csv;charset=utf-8');
+  toast('⬇️ Export CSV แล้ว','ok');
+}
+function exportJSON(){
+  dl(JSON.stringify({batches,exported:today()}),
+    'kiln_backup_'+today()+'.json','application/json');
+  toast('⬇️ Backup JSON แล้ว','ok');
+}
+function importJSON(e){
+  const f=e.target.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      batches=d.batches||d;
+      nextId=batches.length?Math.max(...batches.map(b=>b.id))+1:1;
+      save(); renderOverview(); renderLog();
+      toast('✅ Import สำเร็จ '+batches.length+' รอบ','ok');
+    }catch{toast('❌ ไฟล์ไม่ถูกต้อง','err')}
+  };
+  reader.readAsText(f);
+  e.target.value='';
+}
+function dl(content,name,type){
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════
+// MAINTENANCE
+// ══════════════════════════════
+function loadM(){try{return JSON.parse(localStorage.getItem('kd_maint')||'[]')}catch{return[]}}
+function saveM(){localStorage.setItem('kd_maint',JSON.stringify(maints))}
+let maints = loadM();
+let mNextId = maints.length ? Math.max(...maints.map(m=>m.id))+1 : 1;
+let mCurrentType = 'repair';
+let mCurrentFilter = 'all';
+let mPendingPhotos = []; // [{dataUrl, name}]
+
+function setMType(type, el){
+  mCurrentType = type;
+  document.querySelectorAll('.maint-type-btn[id^="mtype-"]').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+function setMFilter(filter, el){
+  mCurrentFilter = filter;
+  document.querySelectorAll('.maint-type-btn[id^="mf-"]').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderMaint();
+}
+
+function handlePhotos(e){
+  const files = Array.from(e.target.files);
+  files.forEach(f=>{
+    const reader = new FileReader();
+    reader.onload = ev => {
+      mPendingPhotos.push({dataUrl: ev.target.result, name: f.name});
+      renderPhotoPreview();
+    };
+    reader.readAsDataURL(f);
+  });
+  e.target.value='';
+}
+
+function renderPhotoPreview(){
+  const el = document.getElementById('photo-preview');
+  el.innerHTML = mPendingPhotos.map((p,i)=>`
+    <div class="photo-thumb-wrap">
+      <img src="${p.dataUrl}" style="width:72px;height:72px;object-fit:cover;border-radius:5px;border:1px solid var(--border);cursor:pointer" onclick="previewImg('${p.dataUrl}')">
+      <button class="rm-photo" onclick="removePhoto(${i})">✕</button>
+    </div>`).join('');
+}
+function removePhoto(i){ mPendingPhotos.splice(i,1); renderPhotoPreview(); }
+
+function saveMaint(){
+  const date = document.getElementById('m-date').value;
+  const title = document.getElementById('m-title').value.trim();
+  const room = document.getElementById('m-room').value;
+  const person = document.getElementById('m-person').value.trim();
+  const status = document.getElementById('m-status').value;
+  const desc = document.getElementById('m-desc').value.trim();
+
+  if(!date) return toast('กรุณาเลือกวันที่','err');
+  if(!title) return toast('กรุณาใส่หัวข้อ','err');
+
+  const rec = {
+    id: mNextId++, type: mCurrentType, date, title, room: room||null,
+    person, status, desc, photos: [...mPendingPhotos],
+    createdAt: new Date().toISOString()
+  };
+  maints.unshift(rec); saveM();
+  toast(`✅ บันทึกแล้ว: ${title}`,'ok');
+  clearMaintForm(); renderMaint();
+}
+
+function clearMaintForm(){
+  document.getElementById('m-date').value = today();
+  document.getElementById('m-title').value = '';
+  document.getElementById('m-room').value = '';
+  document.getElementById('m-person').value = '';
+  document.getElementById('m-status').value = 'open';
+  document.getElementById('m-desc').value = '';
+  mPendingPhotos = [];
+  renderPhotoPreview();
+}
+
+function renderMaint(){
+  const search = (document.getElementById('m-search')?.value||'').toLowerCase();
+  let data = [...maints];
+  if(mCurrentFilter==='repair') data=data.filter(m=>m.type==='repair');
+  else if(mCurrentFilter==='mold') data=data.filter(m=>m.type==='mold');
+  else if(mCurrentFilter==='other') data=data.filter(m=>m.type==='other');
+  else if(mCurrentFilter==='open') data=data.filter(m=>m.status==='open');
+  if(search) data=data.filter(m=>
+    m.title.toLowerCase().includes(search)||
+    (m.desc||'').toLowerCase().includes(search)||
+    (m.person||'').toLowerCase().includes(search)||
+    String(m.room||'').includes(search)
+  );
+
+  const countEl = document.getElementById('maint-count');
+  if(countEl) countEl.textContent = data.length+' รายการ';
+
+  const el = document.getElementById('maint-list');
+  if(!el) return;
+  if(!data.length){ el.innerHTML='<div class="empty-state">ไม่พบรายการ</div>'; return; }
+
+  const typeLabel = {repair:'🔧 ซ่อมบำรุง', mold:'🍄 ไม้ขึ้นรา', other:'📌 อื่นๆ'};
+  const typeCls   = {repair:'type-repair', mold:'type-mold', other:'type-other'};
+
+  el.innerHTML = data.map(m=>`
+    <div class="maint-card" id="mc-${m.id}">
+      <div class="mc-head">
+        <div>
+          <span class="type-badge ${typeCls[m.type]}">${typeLabel[m.type]}</span>
+          <span class="type-badge ${m.status==='done'?'status-done':'status-open'}" style="margin-left:4px">
+            ${m.status==='done'?'✅ เสร็จแล้ว':'🔴 รอดำเนินการ'}
+          </span>
+          <div class="mc-title" style="margin-top:6px">${m.title}</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          ${m.status==='open'?`<button class="btn btn-success btn-sm" onclick="toggleMaintStatus(${m.id},event)">✅ เสร็จ</button>`:''}
+          <button class="btn btn-ghost btn-sm" onclick="deleteMaint(${m.id},event)" style="color:var(--red);border-color:var(--red)">🗑</button>
+        </div>
+      </div>
+      <div class="mc-meta">
+        <span>📅 ${ds(m.date)}</span>
+        ${m.room?`<span>🏠 KD ${m.room}</span>`:''}
+        ${m.person?`<span>👤 ${m.person}</span>`:''}
+      </div>
+      ${m.desc?`<div class="mc-desc">${m.desc.replace(/\n/g,'<br>')}</div>`:''}
+      ${m.photos&&m.photos.length?`
+        <div class="mc-imgs">
+          ${m.photos.map(p=>`<img src="${p.dataUrl}" alt="${p.name}" onclick="previewImg('${p.dataUrl}')" loading="lazy">`).join('')}
+        </div>`:''}
+    </div>`).join('');
+}
+
+function toggleMaintStatus(id, e){
+  e.stopPropagation();
+  const idx = maints.findIndex(m=>m.id===id);
+  if(idx<0) return;
+  maints[idx].status = maints[idx].status==='open'?'done':'open';
+  saveM(); renderMaint();
+  toast('✅ อัปเดตสถานะแล้ว','ok');
+}
+function deleteMaint(id, e){
+  e.stopPropagation();
+  if(!confirm('ลบรายการนี้?')) return;
+  maints = maints.filter(m=>m.id!==id);
+  saveM(); renderMaint();
+  toast('🗑 ลบแล้ว','ok');
+}
+
+function previewImg(src){
+  const ov = document.createElement('div');
+  ov.className = 'img-preview-overlay';
+  ov.innerHTML = `<img src="${src}">`;
+  ov.onclick = ()=>ov.remove();
+  document.body.appendChild(ov);
+}
+
+// override switchTab to handle maint pane
+const _switchTabCore = switchTab;
+switchTab = function(tab, el){
+  document.getElementById('pane-maint').style.display = 'none';
+  document.querySelector('.content').style.display = 'block';
+
+  if(tab === 'maint'){
+    document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('pane-maint').style.display = 'block';
+    renderMaint();
+    return;
+  }
+  _switchTabCore(tab, el);
+};
+
+// ══════════════════════════════
+// QUICK ENTRY (text parser — no API)
+// ══════════════════════════════
+function openAIModal(){
+  document.getElementById('ai-modal').style.display='flex';
+  document.getElementById('ai-result').style.display='none';
+  document.getElementById('ai-text-input').value='';
+}
+function closeAIModal(){ document.getElementById('ai-modal').style.display='none'; }
+
+// parse: KD30 4/6/69 5/8 AB60PL BC5PL
+// or multi-line, one size per line, same KD
+function runTextParse(){
+  const txt = document.getElementById('ai-text-input').value.trim();
+  if(!txt) return toast('กรุณาพิมพ์ข้อมูลก่อน','err');
+
+  const lines = txt.split('\n').map(l=>l.trim()).filter(l=>l);
+  const roomMap = {}; // room -> {date, sizes:[]}
+
+  lines.forEach(line=>{
+    // extract KD number
+    const kdMatch = line.match(/KD\s*(\d+)/i);
+    if(!kdMatch) return;
+    const room = parseInt(kdMatch[1]);
+
+    // extract date d/m/yy or d-m-yy
+    const dateMatch = line.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})/);
+    let dateStr = null;
+    if(dateMatch){
+      let y = parseInt(dateMatch[3]);
+      if(y < 100) y = y > 50 ? 1900+y : 2000+y; // 69->2069? no: 69->2026 (BE-543)
+      // treat as Buddhist year if >2500, else assume CE+543 offset for 2-digit
+      if(y < 200) y = y + 2500 - 543; // e.g. 69 -> 69+2500-543 = 2026
+      else if(y > 2400) y = y - 543;  // BE to CE
+      dateStr = `${y}-${String(parseInt(dateMatch[2])).padStart(2,'0')}-${String(parseInt(dateMatch[1])).padStart(2,'0')}`;
+    }
+
+    // extract size
+    const sizeMatch = line.match(/([345])\/8/);
+    if(!sizeMatch) return;
+    const size = sizeMatch[1]+'/8';
+
+    // extract grades: AB60PL or AB 60 PL or AB60
+    const grades = {};
+    const gradePattern = /(ABC|AB|BC|C)\s*(\d+)\s*PL?/gi;
+    let gm;
+    while((gm = gradePattern.exec(line)) !== null){
+      const g = gm[1].toUpperCase();
+      grades[g] = parseInt(gm[2]);
+    }
+
+    if(!roomMap[room]) roomMap[room] = {room, date: dateStr, sizes:[]};
+    else if(dateStr) roomMap[room].date = dateStr; // update date if found
+
+    // check if same size already exists → merge grades
+    const existing = roomMap[room].sizes.find(s=>s.size===size);
+    if(existing){
+      ['AB','ABC','BC','C'].forEach(g=>{ if(grades[g]) existing[g.toLowerCase()]=(existing[g.toLowerCase()]||0)+grades[g]; });
+      existing.pallet = ['AB','ABC','BC','C'].reduce((s,g)=>s+(existing[g.toLowerCase()]||0),0);
+    } else {
+      const sz = {size, ab:grades['AB']||0, abc:grades['ABC']||0, bc:grades['BC']||0, c:grades['C']||0, cufIn:0};
+      sz.pallet = sz.ab+sz.abc+sz.bc+sz.c;
+      roomMap[room].sizes.push(sz);
+    }
+  });
+
+  const rooms = Object.values(roomMap).filter(r=>r.sizes.length>0);
+  if(!rooms.length) return toast('อ่านไม่ได้ — ตรวจสอบรูปแบบข้อความ','err');
+  renderParseResult(rooms);
+}
+
+function renderParseResult(rooms){
+  const el = document.getElementById('ai-result');
+  const list = document.getElementById('ai-result-list');
+  const dryingRooms = new Set(getDrying().map(b=>b.room));
+
+  list.innerHTML = rooms.map((r,i)=>{
+    const conflict = dryingRooms.has(r.room);
+    return `<div class="ai-room-card" style="${conflict?'border-color:var(--red)':''}">
+      <div class="ar-head">
+        <input type="checkbox" id="ai-chk-${i}" ${conflict?'':'checked'} style="width:16px;height:16px;accent-color:var(--green)">
+        <span style="font-weight:700;color:${conflict?'var(--red)':'var(--yellow)'}">KD ${r.room}</span>
+        <span style="font-size:11px;color:var(--text2)">📅 ${ds(r.date||today())}</span>
+        ${conflict?'<span style="font-size:10px;color:var(--red)">⚠️ กำลังอบอยู่</span>':''}
+      </div>
+      <div class="ar-sizes">
+        ${r.sizes.map(s=>{
+          const gs=['AB','ABC','BC','C'].filter(g=>s[g.toLowerCase()]>0).map(g=>`${g}:${s[g.toLowerCase()]}PL`).join(' ');
+          return `<div>• ${s.size}" | ${gs||'—'} | รวม ${s.pallet}PL</div>`;
+        }).join('')}
+      </div>
+      <div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <label style="font-size:11px;color:var(--text2)">cuf เข้า:</label>
+        <input type="number" id="ai-cuf-${i}" placeholder="0.0" step="0.1" min="0"
+          style="width:80px;background:var(--in-bg);border:1px solid var(--border);border-radius:4px;
+          color:var(--text);padding:4px 8px;font-family:var(--mono);font-size:12px;outline:none">
+        <label style="font-size:11px;color:var(--text2)">หมายเหตุ:</label>
+        <input type="text" id="ai-note-${i}" placeholder="..."
+          style="flex:1;min-width:80px;background:var(--in-bg);border:1px solid var(--border);border-radius:4px;
+          color:var(--text);padding:4px 8px;font-family:var(--sans);font-size:12px;outline:none">
+      </div>
+    </div>`;
+  }).join('');
+
+  list.innerHTML += `<button class="btn btn-success" style="width:100%;margin-top:8px"
+    onclick='confirmImport(${JSON.stringify(rooms)})'>💾 บันทึกห้องที่เลือก</button>`;
+  el.style.display='block';
+}
+
+function confirmImport(rooms){
+  let count=0;
+  rooms.forEach((r,i)=>{
+    const chk=document.getElementById('ai-chk-'+i);
+    if(!chk||!chk.checked) return;
+    if(getDrying().some(b=>b.room===r.room)) return;
+    const cuf=parseFloat(document.getElementById('ai-cuf-'+i)?.value)||0;
+    const note=document.getElementById('ai-note-'+i)?.value||'';
+    const szCount=r.sizes.length;
+    const sizes=r.sizes.map(s=>({...s, cufIn:szCount>0?cuf/szCount:0}));
+    const b={
+      id:nextId++, room:r.room, factory:'Southern Star',
+      dateIn:r.date||today(), dateOut:null,
+      pallet:sizes.reduce((s,x)=>s+(x.pallet||0),0)||'',
+      note, status:'drying', sizes,
+      moisture:null, actualDays:null, targetDays:calcTargetDays(sizes)
+    };
+    batches.push(b); count++;
+  });
+  if(!count){ toast('ไม่มีห้องที่เลือก','err'); return; }
+  save();
+  toast(`✅ บันทึก ${count} ห้องแล้ว`,'ok');
+  closeAIModal(); renderEntryIn(); renderOverview();
+}
+
+// ══════════════════════════════
+// TOAST
+// ══════════════════════════════
+function toast(msg,type='ok'){
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;t.textContent=msg;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+document.getElementById('in-date').value=today();
+document.getElementById('out-date').value=today();
+document.getElementById('hd-date').innerHTML=
+  `<span>${new Date().toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'})}</span>`;
+addSizeRow();
+renderOverview();
+clearMaintForm();
+</script>
+</body>
+</html>
