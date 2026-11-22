@@ -834,14 +834,19 @@ function renderOverview(){
   let tCufIn=0,tAB=0;
   doneMonth.forEach(b=>{const t=calcBatchTotals(b);tCufIn+=t.cufIn;tAB+=t.ab});
   const pAB=tCufIn>0?tAB/tCufIn*100:0;
-  const avgDays=doneMonth.length?doneMonth.reduce((s,b)=>s+(b.actualDays||0),0)/doneMonth.length:0;
+  // วันอบเฉลี่ย: เฉพาะรอบที่อบจริงและออกแล้วในเดือนนี้ — ใช้ actualDays ถ้ามี ไม่งั้นคิดจากวันเข้า→วันออก
+  // รอบที่ไม่มีวันเข้า/ออก หรือได้ค่า ≤0 (ข้อมูลไม่สมบูรณ์) ไม่นำมาเฉลี่ย ห้องว่างไม่เกี่ยวเพราะไม่มีรอบอยู่แล้ว
+  const dayList=doneMonth
+    .map(b=>b.actualDays!=null?b.actualDays:daysBetween(b.dateIn,b.dateOut))
+    .filter(d=>d!=null&&d>0);
+  const avgDays=dayList.length?dayList.reduce((s,d)=>s+d,0)/dayList.length:0;
 
   document.getElementById('kpi-grid').innerHTML=[
     ['กำลังอบ','Drying',drying.length,'ห้อง',`of ${ROOMS} rooms`,'var(--accent)'],
     ['เกินเป้า','Overdue',over.length,'ห้อง','needs checking','var(--red)'],
     ['ห้องว่าง','Empty',ROOMS-drying.length,'ห้อง','ready for wood','var(--green)'],
     ['รอบเดือนนี้','This month',doneMonth.length,'รอบ','completed','var(--accent2)'],
-    ['วันอบเฉลี่ย','Avg. days',avgDays>0?avgDays.toFixed(1):'—','วัน','per batch','var(--accent2)'],
+    ['วันอบเฉลี่ย','Avg. days',avgDays>0?avgDays.toFixed(1):'—','วัน',`จาก ${dayList.length} รอบ · from ${dayList.length} batches`,'var(--accent2)'],
     ['รวมทุกรอบ','All batches',batches.length,'รอบ','all time','var(--text2)'],
   ].map(([l,en,v,u,s,c])=>`<div class="kpi-card"><div class="kpi-label">${l}<span class="en">${en}</span></div>
     <div class="kpi-val" style="color:${c}">${v}<span class="kpi-unit">${u}</span></div>
