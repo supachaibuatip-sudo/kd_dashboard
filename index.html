@@ -7,18 +7,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#0f1419;--surface:#1a2232;--surface2:#223048;--border:#2d4060;
-  --accent:#f5a623;--accent2:#4fc3f7;--green:#4caf50;--red:#ef5350;
-  --orange:#ff9800;--yellow:#ffeb3b;--text:#e8edf3;--text2:#8fa5c0;
-  --text3:#4d6480;--in-bg:#253d5b;--radius:8px;
+  --bg:#b9d6ee;--surface:#eef6fc;--surface2:#dcebf7;--border:#9fbfda;
+  --accent:#b45f06;--accent2:#0b6ea8;--green:#2e8b3e;--red:#d32f2f;
+  --orange:#e65100;--yellow:#8f6a00;--text:#27333a;--text2:#4d5d64;
+  --text3:#7b8b90;--in-bg:#f9fcff;--radius:8px;
   --mono:'IBM Plex Mono',monospace;--sans:'Sarabun',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh}
 
-.header{background:linear-gradient(135deg,#0d1f35,#1a3a5c);border-bottom:2px solid var(--accent);
+.header{background:#eef6fc;border-bottom:3px solid #f5a623;
   padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+  position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(30,50,80,.10)}
 .header h1{font-size:16px;font-weight:700;color:var(--accent)}
 .header .sub{font-size:11px;color:var(--text2);margin-top:2px}
 .stat-pill{background:var(--surface2);border:1px solid var(--border);border-radius:20px;
@@ -48,7 +48,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
   color:var(--text);padding:7px 10px;font-family:var(--sans);font-size:13px;outline:none;transition:border-color .2s}
 .field input:focus,.field select:focus{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(79,195,247,.15)}
 .field input[type=number]{font-family:var(--mono)}
-.calc{background:#1a2e1a;border:1px solid #2d5c2d;border-radius:5px;padding:7px 10px;
+.calc{background:#e3eee2;border:1px solid #b5cfb8;border-radius:5px;padding:7px 10px;
   font-family:var(--mono);font-size:13px;color:var(--green);min-height:33px}
 .hint{font-size:10px;color:var(--text3)}
 
@@ -61,7 +61,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .size-row .grade-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
 .grade-row-item{display:flex;flex-direction:column;gap:3px}
 .grade-row-item label{font-size:10px;color:var(--text3);font-weight:600}
-.grade-row-item input{background:#1a2e45;border:1px solid var(--border);border-radius:4px;
+.grade-row-item input{background:#f9fcff;border:1px solid var(--border);border-radius:4px;
   color:var(--text);padding:5px 8px;font-family:var(--mono);font-size:12px;outline:none}
 .grade-row-item input:focus{border-color:var(--accent2)}
 .btn-rm-size{position:absolute;top:8px;right:8px;background:none;border:none;
@@ -71,8 +71,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .btn-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .btn{padding:7px 18px;border-radius:6px;border:none;font-family:var(--sans);
   font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
-.btn-primary{background:var(--accent);color:#111}
-.btn-primary:hover{background:#f0b040;transform:translateY(-1px)}
+.btn-primary{background:#f5a623;color:#2b1a00}
+.btn-primary:hover{background:#ffb938;transform:translateY(-1px)}
 .btn-success{background:var(--green);color:#fff}
 .btn-success:hover{background:#43a047}
 .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2)}
@@ -97,15 +97,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .room-box:hover{border-color:var(--accent2)}
 .room-box .rn{font-weight:700;font-family:var(--mono);font-size:13px;margin-bottom:1px}
 .room-box .ri{font-size:9px;color:var(--text2);line-height:1.3}
-.room-empty{opacity:.4}
-.room-drying{border-color:#c8a400!important;background:rgba(200,164,0,.1)}
+.room-empty{opacity:1;background:#e8f1e6;border-color:#b9d3bd}
+.room-drying{border-color:#d9a920!important;background:#f3ead0}
 .room-drying .rn{color:var(--yellow)}
-.room-done{border-color:var(--orange)!important;background:rgba(255,152,0,.1)}
+.room-done{border-color:var(--orange)!important;background:#ffe9d2}
 .room-done .rn{color:var(--orange)}
-.room-over{border-color:var(--red)!important;background:rgba(239,83,80,.1);animation:pulse 2s infinite}
+.room-over{border-color:var(--red)!important;background:#f3dcda;animation:pulse 2s infinite}
 .room-over .rn{color:var(--red)}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,83,80,0)}50%{box-shadow:0 0 0 4px rgba(239,83,80,.3)}}
-.day-badge{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.5);border-radius:3px;
+.day-badge{position:absolute;top:2px;right:2px;background:rgba(242,248,253,.88);border-radius:3px;
   padding:1px 3px;font-size:8px;font-family:var(--mono)}
 
 /* out list */
@@ -118,44 +118,42 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
   border-radius:5px;color:var(--text);padding:5px 8px;font-family:var(--mono);font-size:13px;outline:none}
 .moisture-input input:focus{border-color:var(--accent2)}
 .moisture-badge{font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:10px}
-.mok{background:rgba(76,175,80,.2);color:#81c784;border:1px solid #2e7d32}
-.mwarn{background:rgba(239,83,80,.2);color:#ef9a9a;border:1px solid #b71c1c}
+.mok{background:#e3f4e5;color:#1f6b2c;border:1px solid #9fd2a6}
+.mwarn{background:#fdeaea;color:#b71c1c;border:1px solid #f0aaaa}
 
 /* gantt */
 .gantt-wrap{overflow-x:auto}
-.gtable{border-collapse:collapse;font-size:11px;min-width:800px;width:100%}
+.gtable{border-collapse:collapse;font-size:11px;min-width:760px;width:100%;table-layout:fixed}
 .gtable th,.gtable td{border:1px solid var(--border);padding:0;text-align:center;vertical-align:middle}
 .th-room{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 6px;
-  position:sticky;left:0;z-index:2;min-width:36px}
+  position:sticky;left:0;z-index:2}
 .th-fac{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 5px;
   position:sticky;left:36px;z-index:2;min-width:44px}
-.th-day{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 3px;min-width:26px;font-family:var(--mono)}
-.th-day.tcol{background:rgba(245,166,35,.2);color:var(--accent)}
+.th-day{background:var(--surface2);color:var(--text2);font-size:10px;padding:4px 0;font-family:var(--mono)}
+.th-day.tcol{background:#f1dfb8;color:var(--accent)}
 .td-room{background:var(--surface);color:var(--text2);font-weight:700;font-size:11px;
-  padding:3px 4px;position:sticky;left:0;z-index:1}
+  padding:3px 2px;position:sticky;left:0;z-index:1}
 .td-fac{background:var(--surface);color:var(--text3);font-size:10px;padding:3px 4px;
   position:sticky;left:36px;z-index:1}
-.gc{width:26px;height:24px;cursor:pointer;position:relative}
+.gc{height:24px;cursor:pointer;position:relative}
 .gc:hover{opacity:.8}
-.gc.drying{background:linear-gradient(135deg,#c8a400,#f5c518)}
-.gc.done{background:linear-gradient(135deg,#e65c00,#f9a825)}
+.gc.first{border-left:2px solid #1f2a37!important}
 .gc.tcol{border-left:2px solid var(--accent)!important}
-.gc .ct{font-size:7px;color:#111;font-weight:700;line-height:1.2;padding:1px 2px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:24px}
+.gc .ct{font-size:9px;font-weight:600;line-height:1;font-family:var(--mono)}
 
 /* log table */
 .log-wrap{overflow-x:auto}
 .ltable{border-collapse:collapse;width:100%;font-size:12px}
 .ltable th{background:var(--surface2);color:var(--text2);padding:7px 8px;text-align:center;
   border:1px solid var(--border);font-size:11px;font-weight:600;white-space:nowrap}
-.ltable td{padding:5px 8px;border:1px solid #1e2d3d;text-align:center;
+.ltable td{padding:5px 8px;border:1px solid var(--border);text-align:center;
   color:var(--text);white-space:nowrap}
-.ltable tr:nth-child(even) td{background:rgba(255,255,255,.02)}
-.ltable tr:hover td{background:rgba(79,195,247,.05)}
+.ltable tr:nth-child(even) td{background:#e4f0fa}
+.ltable tr:hover td{background:#d9eaf7}
 .badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700}
-.b-drying{background:rgba(245,166,35,.2);color:var(--accent);border:1px solid #8d6e00}
-.b-ok{background:rgba(76,175,80,.2);color:#81c784;border:1px solid #2e7d32}
-.b-warn{background:rgba(239,83,80,.2);color:#ef9a9a;border:1px solid #b71c1c}
+.b-drying{background:#fff2d9;color:#8a4b00;border:1px solid #f0c47a}
+.b-ok{background:#e3f4e5;color:#1f6b2c;border:1px solid #9fd2a6}
+.b-warn{background:#fdeaea;color:#b71c1c;border:1px solid #f0aaaa}
 .mono{font-family:var(--mono)}
 .good{color:var(--green)}.warn2{color:var(--orange)}.bad{color:var(--red)}
 
@@ -171,8 +169,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 
 /* toast */
 .toast-wrap{position:fixed;bottom:16px;right:16px;display:flex;flex-direction:column;gap:6px;z-index:9999}
-.toast{background:var(--surface2);border:1px solid var(--border);border-radius:8px;
-  padding:9px 14px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.4);
+.toast{background:#f6fafe;border:1px solid var(--border);border-radius:8px;
+  padding:9px 14px;font-size:13px;box-shadow:0 4px 18px rgba(30,50,80,.22);
   animation:slin .2s ease;min-width:200px}
 .toast.ok{border-left:4px solid var(--green)}
 .toast.err{border-left:4px solid var(--red)}
@@ -199,10 +197,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .maint-card .mc-imgs img:hover{transform:scale(1.05)}
 .type-badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700}
 .type-repair{background:rgba(79,195,247,.15);color:var(--accent2);border:1px solid rgba(79,195,247,.3)}
-.type-mold{background:rgba(239,83,80,.15);color:#ef9a9a;border:1px solid rgba(239,83,80,.3)}
-.type-other{background:rgba(255,152,0,.15);color:#ffb74d;border:1px solid rgba(255,152,0,.3)}
-.status-open{background:rgba(239,83,80,.15);color:#ef9a9a;border:1px solid rgba(239,83,80,.3)}
-.status-done{background:rgba(76,175,80,.15);color:#81c784;border:1px solid rgba(76,175,80,.3)}
+.type-mold{background:rgba(239,83,80,.12);color:#b71c1c;border:1px solid rgba(239,83,80,.3)}
+.type-other{background:rgba(255,152,0,.14);color:#b45f06;border:1px solid rgba(255,152,0,.3)}
+.status-open{background:rgba(239,83,80,.12);color:#b71c1c;border:1px solid rgba(239,83,80,.3)}
+.status-done{background:rgba(76,175,80,.14);color:#1f6b2c;border:1px solid rgba(76,175,80,.3)}
 .img-preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;
   display:flex;align-items:center;justify-content:center;cursor:pointer}
 .img-preview-overlay img{max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain}
@@ -216,7 +214,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
   cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 
 /* modal */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(25,40,60,.45);z-index:200;
   align-items:center;justify-content:center}
 .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;
   padding:20px;min-width:320px;max-width:480px;position:relative;max-height:80vh;overflow-y:auto}
@@ -326,7 +324,7 @@ textarea:focus{border-color:var(--accent2)}
 .log-wrap{max-height:68vh;overflow:auto;border:1px solid var(--border);border-radius:8px}
 .ltable{min-width:1180px}
 .ltable thead th{position:sticky;z-index:3;line-height:1.2;vertical-align:middle}
-.ltable thead tr.grp th{top:0;height:26px;background:var(--bg);color:var(--accent2);font-size:11px;
+.ltable thead tr.grp th{top:0;height:26px;background:#c3dbef;color:var(--accent2);font-size:11px;
   border-bottom:2px solid var(--border)}
 .ltable thead tr.grp th .en{display:inline;margin-left:5px}
 .ltable thead tr:nth-child(2) th{top:26px;padding:5px 8px}
@@ -337,6 +335,14 @@ textarea:focus{border-color:var(--accent2)}
 .ltable td{padding:6px 8px}
 .badge{white-space:nowrap}
 
+.btn-danger{background:transparent;border:1px solid var(--red);color:var(--red)}
+.btn-danger:hover{background:var(--red);color:#fff}
+/* view-only mode */
+.ro-banner{display:none;background:#1b3a5c;color:var(--accent2);text-align:center;font-size:12px;padding:6px 12px;border-bottom:1px solid var(--border)}
+.readonly .ro-banner{display:block}
+.readonly .ro-hide{display:none!important}
+.ro-opt{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin:4px 0 12px;cursor:pointer;font-size:12px;line-height:1.5}
+.ro-opt input{width:16px;height:16px;margin-top:3px;accent-color:var(--accent2)}
 /* toast: Thai line + English line */
 .toast .en{display:block;margin:2px 0 0;font-size:11px;color:var(--text2)}
 
@@ -351,6 +357,46 @@ textarea:focus{border-color:var(--accent2)}
   .li.note{margin-left:0;flex-basis:100%}
   .chip-search{margin-left:0;width:100%}
 }
+
+/* ═══════════ v3: light theme extras, blocked rooms, warnings ═══════════ */
+.room-blocked{background:repeating-linear-gradient(45deg,#eceff3,#eceff3 6px,#e0e5eb 6px,#e0e5eb 12px);border-color:#a9b4c2!important;cursor:pointer}
+.room-blocked .rn{color:var(--text2)}
+.room-blocked .ri{color:var(--text2);font-size:9px}
+.room-blocked-lb{background:repeating-linear-gradient(45deg,#eceff3,#eceff3 3px,#cfd6df 3px,#cfd6df 6px);border:1px solid #a9b4c2}
+.gc.blk{background:repeating-linear-gradient(45deg,#f1f3f6,#f1f3f6 4px,#e0e5eb 4px,#e0e5eb 8px)}
+.td-blocked i{font-style:normal;font-size:8px;margin-left:1px}
+.dwarn{font-size:11.5px;margin-top:6px;padding:5px 9px;border-radius:6px;line-height:1.4}
+.dwarn.warn{background:#fff6dc;border:1px solid #f0c969;color:#7a4b00}
+.dwarn.err{background:#fdeaea;border:1px solid #f0aaaa;color:#b71c1c}
+.dwarn .en{display:block;margin:0;color:inherit;opacity:.8}
+.stop-tag{font-size:11px;color:var(--orange);font-weight:600}
+.stop-tag .en{display:inline}
+.type-stop{background:rgba(230,81,0,.12);color:#b53d00;border:1px solid rgba(230,81,0,.3)}
+.type-block{background:#e6eaf0;color:#3b4a5e;border:1px solid #b6c1d0}
+.maint-card{background:#f6fafe}
+.maint-card:hover{box-shadow:0 2px 10px rgba(30,50,80,.10)}
+.mc-reason{font-size:12px;color:var(--text2);margin-top:4px}
+.kpi-card{box-shadow:0 1px 3px rgba(30,50,80,.06)}
+.card{box-shadow:0 1px 4px rgba(30,50,80,.06)}
+.tab.active{background:#fdf1dc}
+.field input:focus,.field select:focus{box-shadow:0 0 0 3px rgba(11,110,168,.15)}
+.size-row{background:#e1eef9}
+.out-room-card{background:#e1eef9}
+.stat-pill{background:#dcebf7}
+.stat-pill span{color:var(--accent)}
+.photo-btn{background:#e4f0fa}
+
+/* v4: prominent buttons */
+.btn{box-shadow:0 2px 4px rgba(20,50,90,.22);letter-spacing:.2px}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 2px rgba(20,50,90,.25)}
+.btn-primary{background:#f28c00;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.2)}
+.btn-primary:hover{background:#ff9e1b}
+.btn-success{background:#1f8a3b;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.2)}
+.btn-success:hover{background:#27a047}
+.btn-ghost{background:#fff;border:1.5px solid #3b6a96;color:#1d4f7c;box-shadow:0 1px 3px rgba(20,50,90,.15)}
+.btn-ghost:hover{background:#1d4f7c;border-color:#1d4f7c;color:#fff}
+.btn-add{background:#fff;border:1.5px dashed #3b6a96;color:#1d4f7c}
+.btn-danger{background:#fff}
 </style>
 </head>
 <body>
@@ -368,13 +414,14 @@ textarea:focus{border-color:var(--accent2)}
   </div>
 </div>
 
+<div class="ro-banner">👁 โหมดดูอย่างเดียว · View-only — ไม่สามารถแก้ไขข้อมูลได้ · editing is disabled</div>
 <div class="tabs">
   <div class="tab active" onclick="switchTab('overview',this)">📊 ภาพรวม<span class="en">Overview</span></div>
-  <div class="tab" onclick="switchTab('entry-in',this)">➕ ไม้เข้าห้อง<span class="en">Wood in</span></div>
-  <div class="tab" onclick="switchTab('entry-out',this)">✅ ไม้ออกห้อง<span class="en">Wood out</span></div>
+  <div class="tab ro-hide" onclick="switchTab('entry-in',this)">➕ ไม้เข้าห้อง<span class="en">Wood in</span></div>
+  <div class="tab ro-hide" onclick="switchTab('entry-out',this)">✅ ไม้ออกห้อง<span class="en">Wood out</span></div>
   <div class="tab" onclick="switchTab('gantt',this)">📅 ตารางห้อง<span class="en">Gantt</span></div>
   <div class="tab" onclick="switchTab('log',this)">📋 ประวัติ<span class="en">History</span></div>
-  <div class="tab" onclick="switchTab('maint',this)">🔧 บำรุงรักษา<span class="en">Maintenance</span></div>
+  <div class="tab" onclick="switchTab('maint',this)">🔧 ซ่อมบำรุง<span class="en">Maintenance &amp; Stops</span></div>
 </div>
 
 <div class="content">
@@ -387,9 +434,10 @@ textarea:focus{border-color:var(--accent2)}
       <span class="card-hint">คลิกห้องเพื่อดูรายละเอียด · Click a room for details</span>
     </div>
     <div class="legend">
-      <div class="li"><div class="lb" style="background:var(--surface);border:1px solid var(--border)"></div>ว่าง<span class="en">Empty</span></div>
-      <div class="li"><div class="lb" style="background:#c8a40099"></div>กำลังอบ<span class="en">Drying</span></div>
-      <div class="li"><div class="lb" style="background:#ef535099"></div>เกินเป้า<span class="en">Overdue</span></div>
+      <div class="li"><div class="lb" style="background:#e8f1e6;border:1px solid #b9d3bd"></div>ว่าง<span class="en">Empty</span></div>
+      <div class="li"><div class="lb room-blocked-lb"></div>ใช้งานไม่ได้<span class="en">Unavailable</span></div>
+      <div class="li"><div class="lb" style="background:#f3ead0;border:1px solid #d9a920"></div>กำลังอบ<span class="en">Drying</span></div>
+      <div class="li"><div class="lb" style="background:#f3dcda;border:1px solid #d32f2f"></div>เกินเป้า<span class="en">Overdue</span></div>
       <div class="li note">ตัวเลขมุมห้อง = วันที่อบมา<span class="en">corner number = days in kiln (d)</span></div>
     </div>
     <div class="room-grid" id="room-grid"></div>
@@ -403,7 +451,7 @@ textarea:focus{border-color:var(--accent2)}
     <div class="modal-title">⚡ กรอกข้อมูลเร็ว<span class="en">Quick entry — several rooms at once</span></div>
     <div class="modal-help">
       พิมพ์ 1 บรรทัดต่อ 1 ขนาด<span class="en">one line per size</span>
-      <div class="code-fmt">KD[ห้อง/room] [วัน/เดือน/ปี d/m/y] [ขนาด size] [เกรด grade][PL]</div>
+      <div class="code-fmt">KD[ห้อง/room] [วันที่ไม้เข้าห้อง · date in  d/m/y] [ขนาด size] [เกรด grade][PL]</div>
       <div class="code-ex">KD30 4/6/69 5/8 AB60PL<br>KD11 4/6/69 4/8 ABC16PL C2PL<br>KD11 4/6/69 5/8 AB23PL BC19PL C6PL</div>
     </div>
 
@@ -481,7 +529,7 @@ textarea:focus{border-color:var(--accent2)}
       </div>
     </div>
 
-    <div class="sec">ติ๊กห้องที่ออก แล้วกรอกความชื้น (ผ่านเมื่อ ≤ 7%)<span class="en">Tick rooms leaving and enter moisture (pass if ≤ 7%)</span></div>
+    <div class="sec">ติ๊กห้องที่ออก แล้วกรอกความชื้น (ผ่านเมื่อ ≤ 7.5%)<span class="en">Tick rooms leaving and enter moisture (pass if ≤ 7.5%)</span></div>
     <div id="out-rooms-list"></div>
 
     <div class="divider"></div>
@@ -501,8 +549,11 @@ textarea:focus{border-color:var(--accent2)}
       <select id="gantt-year" onchange="renderGantt()"></select>
     </div>
     <div class="legend">
-      <div class="li"><div class="lb" style="background:linear-gradient(135deg,#c8a400,#f5c518)"></div>กำลังอบ<span class="en">Drying</span></div>
-      <div class="li"><div class="lb" style="background:linear-gradient(135deg,#e65c00,#f9a825)"></div>ออกแล้ว<span class="en">Unloaded</span></div>
+      <div class="li"><div class="lb" style="background:linear-gradient(90deg,hsl(36 82% 34%),hsl(36 82% 72%))"></div>กำลังอบ เข้ม→อ่อน = วันเข้า→ออก<span class="en">Drying: dark→light = in→out</span></div>
+      <div class="li"><div class="lb" style="background:linear-gradient(90deg,hsl(208 62% 34%),hsl(208 62% 72%))"></div>ออกแล้ว<span class="en">Unloaded</span></div>
+      <div class="li"><div class="lb" style="background:linear-gradient(90deg,hsl(2 68% 34%),hsl(2 68% 72%))"></div>อบเกินเป้า<span class="en">Overdue</span></div>
+      <div class="li"><div class="lb room-blocked-lb"></div>ใช้งานไม่ได้<span class="en">Unavailable</span></div>
+      <div class="li note">ตัวเลขในช่อง = วันที่ n ของรอบ · ⏸ = หยุดเตา<span class="en">number = day n of batch · ⏸ = furnace stop</span></div>
     </div>
     <div class="gantt-wrap" id="gantt-wrap"><div class="empty-state">ยังไม่มีข้อมูล<span class="en">No data yet</span></div></div>
   </div>
@@ -524,9 +575,10 @@ textarea:focus{border-color:var(--accent2)}
         <option value="done">เสร็จแล้ว · Done</option>
       </select>
       <span class="frow-gap"></span>
+      <button class="btn btn-ghost btn-sm ro-hide" onclick="openDupModal()">🧹 รอบซ้ำ<span class="en">Duplicates</span></button>
       <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇️ CSV</button>
       <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇️ Backup</button>
-      <label class="btn btn-ghost btn-sm" style="cursor:pointer">📂 Import <input type="file" accept=".json" onchange="importJSON(event)" style="display:none"></label>
+      <label class="btn btn-ghost btn-sm ro-hide" style="cursor:pointer">📂 Import <input type="file" accept=".json" onchange="importJSON(event)" style="display:none"></label>
     </div>
     <div class="log-wrap">
       <table class="ltable">
@@ -547,7 +599,7 @@ textarea:focus{border-color:var(--accent2)}
             <th>AB</th><th>ABC</th><th>BC</th><th>C</th><th>รวมออก<span class="en">Total</span></th>
             <th>%AB</th><th>Dg%<span class="en">Downgrade</span></th><th>ชื้น%<span class="en">Moisture</span></th>
             <th>พาเลท<span class="en">Pallets</span></th><th>สถานะ<span class="en">Status</span></th>
-            <th>หมายเหตุ<span class="en">Note</span></th><th>แก้ไข<span class="en">Edit</span></th>
+            <th>หมายเหตุ<span class="en">Note</span></th><th class="ro-hide">แก้ไข<span class="en">Edit</span></th>
           </tr>
         </thead>
         <tbody id="log-tbody"></tbody>
@@ -562,11 +614,13 @@ textarea:focus{border-color:var(--accent2)}
 <div id="pane-maint" class="pane" style="display:none">
 <div class="content" style="max-width:1400px;margin:0 auto;padding:16px">
 
-  <div class="card">
+  <div class="card ro-hide">
     <div class="card-title">➕ บันทึกรายการใหม่<span class="en">New record</span></div>
 
     <div class="chips">
       <button class="maint-type-btn active" id="mtype-repair" onclick="setMType('repair',this)">🔧 ซ่อมบำรุง<span class="en">Repair</span></button>
+      <button class="maint-type-btn"        id="mtype-stop"   onclick="setMType('stop',this)">⏸ หยุดเตา<span class="en">Furnace stop</span></button>
+      <button class="maint-type-btn"        id="mtype-block"  onclick="setMType('block',this)">🚫 ห้องใช้งานไม่ได้<span class="en">Room unavailable</span></button>
       <button class="maint-type-btn"        id="mtype-mold"   onclick="setMType('mold',this)">🍄 ไม้ขึ้นรา<span class="en">Mold</span></button>
       <button class="maint-type-btn"        id="mtype-other"  onclick="setMType('other',this)">📌 อื่นๆ<span class="en">Other</span></button>
     </div>
@@ -577,7 +631,7 @@ textarea:focus{border-color:var(--accent2)}
         <input type="date" id="m-date">
       </div>
       <div class="field" id="m-room-field">
-        <label>ห้อง KD (ถ้ามี)<span class="en">Room (optional)</span></label>
+        <label id="m-room-label">ห้อง KD (ถ้ามี)<span class="en">Room (optional)</span></label>
         <select id="m-room">
           <option value="">— ไม่ระบุ · None —</option>
           <option value="1">KD 1</option>
@@ -615,6 +669,15 @@ textarea:focus{border-color:var(--accent2)}
           <option value="33">KD 33</option>
         </select>
       </div>
+      <div class="field" id="m-reason-field" style="display:none">
+        <label>สาเหตุ *<span class="en">Reason</span></label>
+        <select id="m-reason" onchange="updateMForm()"></select>
+      </div>
+      <div class="field" id="m-days-field" style="display:none">
+        <label>จำนวนวันที่หยุด *<span class="en">Days stopped</span></label>
+        <input type="number" id="m-days" min="1" max="14" step="1" value="1">
+        <span class="hint" id="m-days-hint">หยุด 1 วัน = เพิ่มวันอบ 1 วัน · each stop day adds 1 drying day</span>
+      </div>
       <div class="field">
         <label>ผู้แจ้ง / ผู้รับผิดชอบ<span class="en">Reported by</span></label>
         <input type="text" id="m-person" placeholder="ชื่อ · name">
@@ -629,7 +692,7 @@ textarea:focus{border-color:var(--accent2)}
     </div>
 
     <div class="field" style="margin-bottom:10px">
-      <label>หัวข้อ *<span class="en">Title</span></label>
+      <label id="m-title-label">หัวข้อ *<span class="en">Title</span></label>
       <input type="text" id="m-title" placeholder="เช่น พัดลม KD5 เสีย, ไม้รา 3 พาเลท KD12 · e.g. KD5 fan broken">
     </div>
     <div class="field" style="margin-bottom:10px">
@@ -659,6 +722,8 @@ textarea:focus{border-color:var(--accent2)}
     <div class="chips">
       <button class="maint-type-btn active" id="mf-all"    onclick="setMFilter('all',this)">ทั้งหมด<span class="en">All</span></button>
       <button class="maint-type-btn"        id="mf-repair" onclick="setMFilter('repair',this)">🔧 ซ่อมบำรุง<span class="en">Repair</span></button>
+      <button class="maint-type-btn"        id="mf-stop"   onclick="setMFilter('stop',this)">⏸ หยุดเตา<span class="en">Furnace stop</span></button>
+      <button class="maint-type-btn"        id="mf-block"  onclick="setMFilter('block',this)">🚫 ใช้งานไม่ได้<span class="en">Unavailable</span></button>
       <button class="maint-type-btn"        id="mf-mold"   onclick="setMFilter('mold',this)">🍄 ราขึ้น<span class="en">Mold</span></button>
       <button class="maint-type-btn"        id="mf-other"  onclick="setMFilter('other',this)">📌 อื่นๆ<span class="en">Other</span></button>
       <button class="maint-type-btn"        id="mf-open"   onclick="setMFilter('open',this)">🔴 รอดำเนินการ<span class="en">Open</span></button>
@@ -689,6 +754,11 @@ textarea:focus{border-color:var(--accent2)}
       <label>รหัส<span class="en">TOKEN</span></label>
       <input type="password" id="sync-token" placeholder="รหัสเดียวกับใน Code.gs · same as in Code.gs">
     </div>
+    <label class="ro-opt">
+      <input type="checkbox" id="sync-ro">
+      <span><b>👁 โหมดดูอย่างเดียว<span class="en">View-only mode</span></b><br>
+      <span style="font-size:11px;color:var(--text2)">สำหรับเครื่องที่ให้ดูข้อมูลเฉย ๆ — ใช้ “รหัสดูอย่างเดียว” (READ_TOKEN) ซ่อนปุ่มแก้ไขทั้งหมด<span class="en">for people who only need to look — use the READ_TOKEN; all editing is hidden</span></span></span>
+    </label>
     <div class="hint" id="sync-last" style="margin-bottom:8px"></div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="saveSyncCfg()">💾 บันทึกและซิงก์ · Save &amp; sync</button>
@@ -702,6 +772,14 @@ textarea:focus{border-color:var(--accent2)}
   <div class="modal-box">
     <button class="modal-close" onclick="closeGradeModal()">✕</button>
     <div id="grade-modal-content"></div>
+  </div>
+</div>
+
+<!-- Duplicate finder modal -->
+<div class="modal-bg" id="dup-modal" style="display:none">
+  <div class="modal-box" style="max-width:560px;width:95vw;max-height:88vh;overflow:auto">
+    <button class="modal-close" onclick="closeDupModal()">✕</button>
+    <div id="dup-modal-content"></div>
   </div>
 </div>
 
@@ -742,12 +820,19 @@ function stampList(list,kind){
 }
 function save(noSync){
   stampList(batches,'batches');
-  try{localStorage.setItem('kd_batches',JSON.stringify(batches))}
+  stampList(batchTomb,'batches');
+  try{
+    localStorage.setItem('kd_batches',JSON.stringify(batches));
+    localStorage.setItem('kd_batches_del',JSON.stringify(batchTomb));
+  }
   catch(e){toast('❌ บันทึกไม่สำเร็จ (พื้นที่เก็บข้อมูลเต็ม) — กด Backup เก็บไฟล์ไว้ก่อน\nSave failed (storage full) — please Backup first','err')}
   if(!noSync) scheduleSync();
 }
 let batches = load();
-let nextId = batches.length ? Math.max(...batches.map(b=>b.id))+1 : 1;
+// รอบที่ลบแล้ว (tombstone) เก็บแยก เพื่อให้การลบซิงก์ไปเครื่องอื่นได้ แต่ไม่ปนกับรอบจริง
+let batchTomb = (()=>{try{return JSON.parse(localStorage.getItem('kd_batches_del')||'[]')}catch{return[]}})();
+const maxBatchId=()=>Math.max(0,...batches.map(b=>b.id||0),...batchTomb.map(b=>b.id||0));
+let nextId = maxBatchId()+1;
 
 // batch schema:
 // {id, room, factory, dateIn, dateOut, pallet, note, status('drying'|'done'),
@@ -794,6 +879,38 @@ function calcBatchTotals(b){
   const dg=cufIn>0?((cufIn-ab)/cufIn*100):null;
   return{cufIn,ab,abc,bc,c,out,pctAB,dg};
 }
+const MOIST_MAX=7.5;   // ความชื้นผ่านเมื่อ ≤ 7.5%
+function maintActive(){return (typeof maints!=='undefined'?maints:[]).filter(m=>!m.deleted)}
+// วันหยุดเตาที่กระทบรอบอบนี้ (หยุดเตาเฉพาะห้อง หรือทั้งโรงงานถ้าไม่ระบุห้อง) — วันละ 1 วัน/รายการ
+function stopDaysFor(b){
+  if(!b||!b.dateIn) return 0;
+  return maintActive().filter(m=>m.type==='stop'&&(!m.room||m.room==b.room)&&m.date>=b.dateIn&&(!b.dateOut||m.date<=b.dateOut))
+    .reduce((n,m)=>n+Math.max(1,parseInt(m.days)||1),0);
+}
+function effT(b){return (b.targetDays||0)+stopDaysFor(b)}
+// ห้องที่ใช้งานไม่ได้ (ยังไม่ปิดงาน)
+function blockedInfo(r){return maintActive().find(m=>m.type==='block'&&m.status==='open'&&m.room==r)||null}
+const REASONS={
+  stop:[['clean','แยงจุ๊บ / ทำความสะอาดเตา','Clean furnace tubes'],['boiler','ซ่อมบอยเลอร์','Boiler repair'],
+        ['furnace','ซ่อมเตา / ระบบเผาไหม้','Furnace repair'],['fuel','เชื้อเพลิงไม่พอ','Fuel shortage'],
+        ['power','ไฟดับ / ระบบไฟ','Power problem'],['other','อื่น ๆ (ระบุ)','Other']],
+  block:[['oldwood','เก็บไม้เก่า','Storing old wood'],['mold','ไม้ขึ้นรา รอดำเนินการ','Moldy wood awaiting action'],
+        ['storage','เก็บของ','Used for storage'],['broken','ห้องเสีย / รอซ่อม','Broken / awaiting repair'],
+        ['other','อื่น ๆ (ระบุ)','Other']]
+};
+function reasonLabel(type,key){const r=(REASONS[type]||[]).find(x=>x[0]===key);return r?r:null}
+// ตรวจจำนวนวันอบ → {lvl:'err'|'warn'|null, th, en}
+function daysCheck(days,b){
+  if(days==null||isNaN(days)) return {lvl:null};
+  if(days<0) return {lvl:'err',th:`วันอบติดลบ (${days} วัน) — วันออกอยู่ก่อนวันเข้า`,en:`Negative drying time (${days} d) — date out is before date in`};
+  const T=b?effT(b):7;
+  if(days===0) return {lvl:'warn',th:'วันอบ 0 วัน — เข้าและออกวันเดียวกัน ใช่หรือไม่?',en:'0 days — in and out on the same day?'};
+  if(days>45) return {lvl:'warn',th:`อบนาน ${days} วัน ผิดปกติมาก — ตรวจวันที่อีกครั้ง`,en:`${days} days is extremely long — check the dates`};
+  const lo=Math.max(1,T-2);
+  if(days<lo) return {lvl:'warn',th:`อบ ${days} วัน น้อยกว่าปกติ (เป้า ${T} วัน)`,en:`${days} d is shorter than normal (target ${T} d)`};
+  if(days>T+2) return {lvl:'warn',th:`อบ ${days} วัน มากกว่าปกติ (เป้า ${T} วัน)`,en:`${days} d is longer than normal (target ${T} d)`};
+  return {lvl:null};
+}
 function calcTargetDays(sizes){
   if(!sizes||!sizes.length) return 7;
   if(sizes.some(s=>s.size==='5/8')) return 7;
@@ -805,6 +922,7 @@ function calcTargetDays(sizes){
 // TABS
 // ══════════════════════════════
 function switchTab(tab,el){
+  if(isRO()&&(tab==='entry-in'||tab==='entry-out')){tab='overview';el=document.querySelector('.tab')}
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pane-'+tab).classList.add('active');
@@ -821,7 +939,8 @@ function switchTab(tab,el){
 // ══════════════════════════════
 function renderOverview(){
   const drying=getDrying();
-  const over=drying.filter(b=>dft(b.dateIn)>b.targetDays);
+  const over=drying.filter(b=>dft(b.dateIn)>effT(b));
+  const blockedN=Array.from({length:ROOMS},(_,i)=>i+1).filter(r=>!roomBatch(r)&&blockedInfo(r)).length;
   document.getElementById('hd-drying').textContent=drying.length;
   document.getElementById('hd-over').textContent=over.length;
 
@@ -844,7 +963,8 @@ function renderOverview(){
   document.getElementById('kpi-grid').innerHTML=[
     ['กำลังอบ','Drying',drying.length,'ห้อง',`of ${ROOMS} rooms`,'var(--accent)'],
     ['เกินเป้า','Overdue',over.length,'ห้อง','needs checking','var(--red)'],
-    ['ห้องว่าง','Empty',ROOMS-drying.length,'ห้อง','ready for wood','var(--green)'],
+    ['ห้องว่าง','Empty',ROOMS-drying.length-blockedN,'ห้อง','ready for wood','var(--green)'],
+    ['ใช้งานไม่ได้','Unavailable',blockedN,'ห้อง','stored / broken','var(--text2)'],
     ['รอบเดือนนี้','This month',doneMonth.length,'รอบ','completed','var(--accent2)'],
     ['วันอบเฉลี่ย','Avg. days',avgDays>0?avgDays.toFixed(1):'—','วัน',`จาก ${dayList.length} รอบ · from ${dayList.length} batches`,'var(--accent2)'],
     ['รวมทุกรอบ','All batches',batches.length,'รอบ','all time','var(--text2)'],
@@ -855,13 +975,19 @@ function renderOverview(){
   let html='';
   for(let r=1;r<=ROOMS;r++){
     const b=roomBatch(r);
-    if(!b){
+    const bl=!b?blockedInfo(r):null;
+    if(bl){
+      const rl=reasonLabel('block',bl.reason);
+      html+=`<div class="room-box room-blocked" onclick="showRoomModal(${r})">
+        <div class="rn">${r}</div>
+        <div class="ri">🚫 ${rl?rl[1]:'ใช้ไม่ได้'}</div></div>`;
+    } else if(!b){
       html+=`<div class="room-box room-empty" onclick="showRoomModal(${r})">
         <div class="rn" style="color:var(--text3)">${r}</div>
         <div class="ri">${FAC(r).replace('Star','S')}<br>ว่าง</div></div>`;
     } else {
       const days=dft(b.dateIn);
-      const over=days>b.targetDays;
+      const over=days>effT(b);
       const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
       html+=`<div class="room-box ${over?'room-over':'room-drying'}" onclick="showRoomModal(${r})">
         <div class="day-badge" style="color:${over?'var(--red)':'var(--yellow)'}">${days}d</div>
@@ -875,16 +1001,25 @@ function renderOverview(){
 function showRoomModal(r){
   const b=roomBatch(r);
   let html=`<div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:12px">KD ${r}</div>`;
-  if(!b){
+  const bl=!b?blockedInfo(r):null;
+  if(bl){
+    const rl=reasonLabel('block',bl.reason);
+    html+=`<div style="text-align:center;padding:14px 8px 6px;font-size:14px;color:var(--text2)">🚫 ห้องใช้งานไม่ได้<span class="en" style="display:block;margin:3px 0 0">Room unavailable</span></div>
+      <div style="font-size:13px;font-weight:700;text-align:center">${rl?rl[1]+' · '+rl[2]:''}${bl.title&&(!rl||bl.reason==='other')?bl.title:''}</div>
+      <div style="font-size:11px;color:var(--text2);text-align:center;margin-top:6px">ตั้งแต่ ${ds(bl.date)}${bl.person?' · '+bl.person:''}</div>
+      ${bl.desc?`<div style="font-size:11px;color:var(--text3);margin-top:6px">📝 ${bl.desc}</div>`:''}
+      <div class="btn-row ro-hide" style="justify-content:center"><button class="btn btn-success btn-sm" onclick="reopenRoom(${bl.id})">✅ เปิดใช้ห้องแล้ว · Reopen room</button></div>`;
+  } else if(!b){
     html+=`<div style="color:var(--green);text-align:center;padding:20px;font-size:14px">✅ ว่าง พร้อมรับไม้<span class="en" style="display:block;margin:4px 0 0">Empty — ready for wood</span></div>`;
   } else {
     const days=dft(b.dateIn);
-    const diff=days-b.targetDays;
+    const diff=days-effT(b);
     const t=calcBatchTotals(b);
     html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
       <div><div style="color:var(--text2);font-size:10px">วันเข้า<span class="en">Date in</span></div><div class="mono">${ds(b.dateIn)}</div></div>
       <div><div style="color:var(--text2);font-size:10px">อบมา<span class="en">Days in kiln</span></div><div class="mono" style="color:${diff>0?'var(--red)':'var(--yellow)'}">${days} วัน</div></div>
-      <div><div style="color:var(--text2);font-size:10px">เป้า<span class="en">Target</span></div><div class="mono">${b.targetDays} วัน ${diff>0?'<span style="color:var(--red)">+'+diff+'</span>':diff<0?'<span style="color:var(--green)">'+diff+'</span>':'✅'}</div></div>
+      <div><div style="color:var(--text2);font-size:10px">เป้า<span class="en">Target</span></div><div class="mono">${effT(b)} วัน ${diff>0?'<span style="color:var(--red)">+'+diff+'</span>':diff<0?'<span style="color:var(--green)">'+diff+'</span>':'✅'}</div></div>
+      ${stopDaysFor(b)?`<div style="grid-column:1/-1"><div style="color:var(--text2);font-size:10px">หยุดเตา<span class="en">Furnace stop</span></div><div class="mono" style="color:var(--orange)">+${stopDaysFor(b)} วัน (รวมในเป้าแล้ว: ${b.targetDays}+${stopDaysFor(b)})</div></div>`:''}
       <div><div style="color:var(--text2);font-size:10px">cuf เข้า<span class="en">cuf in</span></div><div class="mono">${fn(t.cufIn)}</div></div>
       <div><div style="color:var(--text2);font-size:10px">พาเลท<span class="en">Pallets</span></div><div class="mono">${b.pallet||'—'}</div></div>
     </div>`;
@@ -910,7 +1045,7 @@ function renderEntryIn(){
   const sel=document.getElementById('in-room');
   sel.innerHTML='<option value="">-- เลือก · Select --</option>';
   for(let r=1;r<=ROOMS;r++){
-    if(!drying.has(r)){
+    if(!drying.has(r)&&!blockedInfo(r)){
       const o=document.createElement('option');
       o.value=r; o.textContent=`KD ${r} (${FAC(r)})`;
       sel.appendChild(o);
@@ -981,6 +1116,7 @@ function collectSizeRows(){
 }
 
 function saveIn(){
+  if(roBlock()) return;
   const dateIn=document.getElementById('in-date').value;
   const room=parseInt(document.getElementById('in-room').value);
   const factory='Southern Star';
@@ -991,6 +1127,20 @@ function saveIn(){
   if(!dateIn) return toast('กรุณาเลือกวันที่\nPlease select a date','err');
   if(!room) return toast('กรุณาเลือกห้อง\nPlease select a room','err');
   if(!sizes.length) return toast('กรุณาเพิ่มขนาดไม้อย่างน้อย 1 รายการ\nAdd at least one wood size','err');
+  if(roomBatch(room)) return toast(`KD ${room} มีไม้กำลังอบอยู่แล้ว\nKD ${room} already has a drying batch`,'err');
+  if(blockedInfo(room)) return toast(`KD ${room} ถูกตั้งเป็นห้องใช้งานไม่ได้ — เปิดใช้ห้องที่แท็บซ่อมบำรุงก่อน\nKD ${room} is marked unavailable — reopen it in the Maintenance tab first`,'err');
+  // ป้องกันกรอกผิด
+  const bad=[];
+  sizes.forEach(z=>{ if([z.ab,z.abc,z.bc,z.c,z.cufIn].some(v=>v<0)) bad.push(z.size) });
+  if(bad.length) return toast(`ค่าติดลบไม่ได้ (ขนาด ${bad.join(', ')}")\nNegative values are not allowed`,'err');
+  const ahead=daysBetween(today(),dateIn);
+  if(ahead>0) return toast(`วันเข้าอยู่ในอนาคต (${ds(dateIn)}) — ตรวจวันที่อีกครั้ง\nDate in is in the future — please check`,'err');
+  const warns=[];
+  if(dft(dateIn)>10) warns.push([`วันเข้า ${ds(dateIn)} นานกว่า ${dft(dateIn)} วันแล้ว แต่ยังไม่ออก`,`Date in was ${dft(dateIn)} days ago and the room is still open`]);
+  if(sizes.every(z=>!z.cufIn)) warns.push(['ยังไม่ได้ใส่ cuf เข้า','cuf in is empty']);
+  const prev=batches.filter(x=>x.room==room&&x.dateOut&&x.dateOut>dateIn);
+  if(prev.length) warns.push([`วันเข้าซ้อนกับรอบก่อนของ KD ${room} (ออก ${ds(prev[0].dateOut)})`,`Overlaps the previous batch of KD ${room} (out ${ds(prev[0].dateOut)})`]);
+  if(warns.length&&!confirm('⚠️ คำเตือน · Warning\n\n'+warns.map(w=>'• '+w[0]+'\n  '+w[1]).join('\n')+'\n\nบันทึกต่อหรือไม่? · Save anyway?')) return;
 
   const targetDays=calcTargetDays(sizes);
   const b={
@@ -1019,14 +1169,14 @@ function renderDryingOverview(){
   el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">`+
     drying.map(b=>{
       const days=dft(b.dateIn);
-      const over=days>b.targetDays;
+      const over=days>effT(b);
       const szs=[...new Set(b.sizes.map(s=>s.size))].join(', ');
       const t=calcBatchTotals(b);
       return `<div style="background:var(--surface2);border:1px solid ${over?'var(--red)':'var(--border)'};border-radius:6px;padding:10px">
         <div style="font-weight:700;color:${over?'var(--red)':'var(--yellow)'}">KD ${b.room} <span style="font-size:10px;color:var(--text2)">${b.factory}</span></div>
         <div style="font-size:11px;color:var(--text2)">${szs}" | ${fn(t.cufIn)} cuf | ${b.pallet||'—'} PL</div>
         <div style="font-size:11px;color:var(--text2)">เข้า ${ds(b.dateIn)}<span class="en">in</span></div>
-        <div style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days}/${b.targetDays} วัน ${over?'⚠️':''}<span class="en">day ${days} of ${b.targetDays}</span></div>
+        <div style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days}/${effT(b)} วัน ${over?'⚠️':''}<span class="en">day ${days} of ${effT(b)}</span></div>
       </div>`;
     }).join('')+'</div>';
 }
@@ -1061,7 +1211,8 @@ function renderOutRooms(){
   // build checkboxes + moisture
   el.innerHTML=drying.map(b=>{
     const days=outDate?daysBetween(b.dateIn,outDate):dft(b.dateIn);
-    const over=days>b.targetDays;
+    const over=days>effT(b);
+    const dc=daysCheck(days,{...b,dateOut:outDate});
     const szs=[...new Set(b.sizes.map(s=>s.size))].join(', ');
     const t=calcBatchTotals(b);
     return `<div class="out-room-card" id="orc-${b.id}">
@@ -1069,11 +1220,13 @@ function renderOutRooms(){
         <input type="checkbox" id="chk-${b.id}" style="width:16px;height:16px;cursor:pointer;accent-color:var(--green)">
         <span class="oc-kd" style="color:${over?'var(--red)':'var(--yellow)'}">KD ${b.room}</span>
         <span style="font-size:11px;color:var(--text2)">${szs}" | ${fn(t.cufIn)} cuf</span>
-        <span style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days}/${b.targetDays} วัน ${over?'⚠️':''}<span class="en">day ${days} of ${b.targetDays}</span></span>
+        <span style="font-size:11px;color:${over?'var(--red)':'var(--accent)'}">อบมา ${days}/${effT(b)} วัน ${over?'⚠️':''}<span class="en">day ${days} of ${effT(b)}</span></span>
+        ${stopDaysFor(b)?`<span class="stop-tag">⏸ หยุดเตา +${stopDaysFor(b)} วัน<span class="en">stop +${stopDaysFor(b)}d</span></span>`:''}
       </div>
+      ${dc.lvl?`<div class="dwarn ${dc.lvl}">${dc.lvl==='err'?'⛔':'⚠️'} ${dc.th}<span class="en">${dc.en}</span></div>`:''}
       <div class="moisture-input">
         <label style="font-size:11px;color:var(--text2);min-width:80px">ความชื้น %<span class="en">Moisture</span></label>
-        <input type="number" id="moist-${b.id}" placeholder="≤7" step="0.1" min="0" max="30" oninput="checkMoisture(${b.id})">
+        <input type="number" id="moist-${b.id}" placeholder="≤7.5" step="0.1" min="0" max="40" oninput="checkMoisture(${b.id})">
         <span class="moisture-badge" id="mbadge-${b.id}"></span>
         <label style="font-size:11px;color:var(--text2);margin-left:8px">หมายเหตุ<span class="en">Note</span></label>
         <input type="text" id="outnote-${b.id}" placeholder="ไม่บังคับ · optional" style="width:150px;background:var(--in-bg);border:1px solid var(--border);border-radius:5px;color:var(--text);padding:5px 8px;font-family:var(--sans);font-size:12px;outline:none">
@@ -1104,20 +1257,29 @@ function checkMoisture(id){
   const v=parseFloat(document.getElementById('moist-'+id).value);
   const badge=document.getElementById('mbadge-'+id);
   if(isNaN(v)){badge.textContent='';badge.className='moisture-badge';return}
-  if(v<=7){badge.textContent='✅ ผ่าน · OK';badge.className='moisture-badge mok'}
-  else{badge.textContent=`⚠️ ${v}% สูงเกิน · too high`;badge.className='moisture-badge mwarn'}
+  if(v<0||v>40){badge.textContent='⛔ ค่าไม่สมเหตุผล · invalid';badge.className='moisture-badge mwarn'}
+  else if(v<=MOIST_MAX){badge.textContent='✅ ผ่าน · OK';badge.className='moisture-badge mok'}
+  else{badge.textContent=`⚠️ ${v}% สูงเกิน (>${MOIST_MAX}) · too high`;badge.className='moisture-badge mwarn'}
 }
 
 function saveAllOut(){
+  if(roBlock()) return;
   const outDate=document.getElementById('out-date').value;
   if(!outDate) return toast('กรุณาเลือกวันที่ออก\nPlease select the date out','err');
 
   const drying=getDrying();
   let count=0;
+  const bad=[];
   drying.forEach(b=>{
     const chk=document.getElementById('chk-'+b.id);
     if(!chk||!chk.checked) return;
+    // วันออกก่อนวันเข้า = ข้อมูลผิด ไม่บันทึกเป็นวันติดลบเงียบ ๆ
+    if(b.dateIn&&outDate<b.dateIn){bad.push(b);return}
     const moist=parseFloat(document.getElementById('moist-'+b.id).value);
+    if(!isNaN(moist)&&(moist<0||moist>40)){bad.push(b);return}
+    const dc=daysCheck(daysBetween(b.dateIn,outDate),b);
+    if(dc.lvl==='warn'&&!confirm(`⚠️ KD ${b.room}: ${dc.th}\n${dc.en}\n\nบันทึกออกต่อหรือไม่? · Save anyway?`)) return;
+    if(daysBetween(today(),outDate)>0&&!confirm(`⚠️ KD ${b.room}: วันออก ${ds(outDate)} อยู่ในอนาคต\nDate out is in the future\n\nบันทึกต่อหรือไม่? · Save anyway?`)) return;
     const note=document.getElementById('outnote-'+b.id)?.value||'';
     const idx=batches.findIndex(x=>x.id===b.id);
     batches[idx].dateOut=outDate;
@@ -1126,10 +1288,17 @@ function saveAllOut(){
     batches[idx].actualDays=daysBetween(b.dateIn,outDate);
     if(note) batches[idx].note=(batches[idx].note?batches[idx].note+' | ':'')+note;
     count++;
-    if(!isNaN(moist)&&moist>7) toast(`⚠️ KD ${b.room} ความชื้น ${moist}% เกินเกณฑ์\nKD ${b.room} moisture ${moist}% is over the limit`,'err');
+    if(!isNaN(moist)&&moist>MOIST_MAX) toast(`⚠️ KD ${b.room} ความชื้น ${moist}% เกินเกณฑ์ (≤${MOIST_MAX})\nKD ${b.room} moisture ${moist}% is over the limit`,'err');
   });
 
-  if(!count) return toast('กรุณาเลือกห้องที่จะออก (ติ๊ก ✓)\nTick the rooms leaving (✓)','err');
+  if(bad.length){
+    const names=bad.map(b=>`KD ${b.room} (เข้า ${ds(b.dateIn)})`).join(', ');
+    toast(`❌ ข้ามที่วันออกอยู่ก่อนวันเข้า: ${names} — แก้วันเข้าที่ปุ่ม ✏️ ในหน้าประวัติ\nSkipped (date out is before date in): ${bad.map(b=>'KD '+b.room).join(', ')} — fix the date in via ✏️ in History`,'err');
+  }
+  if(!count){
+    if(!bad.length) toast('กรุณาเลือกห้องที่จะออก (ติ๊ก ✓)\nTick the rooms leaving (✓)','err');
+    return;
+  }
   save();
   toast(`✅ บันทึกออก ${count} ห้อง วันที่ ${ds(outDate)}\nSaved ${count} room(s) out on ${ds(outDate)}`,'ok');
   renderEntryOut(); renderOverview();
@@ -1145,8 +1314,24 @@ function openGradeModal(){
 }
 
 function openGradeModalForBatch(b){
+  if(roBlock()) return;
   const t=calcBatchTotals(b);
-  let html=`<div style="font-weight:700;color:var(--accent);margin-bottom:12px">กรอกเกรดไม้<span class="en">Enter grades</span> — KD ${b.room} (${ds(b.dateIn)}→${ds(b.dateOut)})</div>`;
+  const inpStyle='width:100%;background:var(--in-bg);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:6px 8px;font-family:var(--mono);font-size:12px;outline:none';
+  let html=`<div style="font-weight:700;color:var(--accent);margin-bottom:12px">แก้ไขรอบอบ<span class="en">Edit batch</span> — KD ${b.room}</div>
+    <div style="background:var(--surface2);border-radius:6px;padding:10px;margin-bottom:10px">
+      <div style="font-weight:700;color:var(--text2);font-size:12px;margin-bottom:8px">วันที่<span class="en">Dates</span></div>
+      <div style="display:grid;grid-template-columns:${b.status==='done'?'1fr 1fr':'1fr'};gap:10px">
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:3px">วันที่ไม้เข้าห้อง<span class="en">Date in</span></div>
+          <input type="date" id="gm-${b.id}-datein" value="${b.dateIn||''}" style="${inpStyle}">
+        </div>
+        ${b.status==='done'?`<div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:3px">วันที่ไม้ออกห้อง<span class="en">Date out</span></div>
+          <input type="date" id="gm-${b.id}-dateout" value="${b.dateOut||''}" style="${inpStyle}">
+        </div>`:''}
+      </div>
+    </div>
+    <div style="font-weight:700;color:var(--text2);font-size:12px;margin:4px 0 8px">เกรดไม้<span class="en">Grades</span></div>`;
   (b.sizes||[]).forEach((s,si)=>{
     html+=`<div style="background:var(--surface2);border-radius:6px;padding:10px;margin-bottom:8px">
       <div style="font-weight:700;color:var(--yellow);margin-bottom:8px">${s.size}"</div>
@@ -1167,7 +1352,7 @@ function openGradeModalForBatch(b){
     </div>`;
   });
   html+=`<div class="btn-row">
-    <button class="btn btn-success" onclick="saveGradeModal(${b.id})">💾 บันทึกเกรด · Save grades</button>
+    <button class="btn btn-success" onclick="saveGradeModal(${b.id})">💾 บันทึก · Save</button>
     <button class="btn btn-ghost" onclick="closeGradeModal()">ยกเลิก · Cancel</button>
   </div>`;
   document.getElementById('grade-modal-content').innerHTML=html;
@@ -1175,8 +1360,25 @@ function openGradeModalForBatch(b){
 }
 
 function saveGradeModal(id){
+  if(roBlock()) return;
   const idx=batches.findIndex(b=>b.id===id);
   if(idx<0) return;
+  // วันที่: ตรวจก่อนบันทึก วันออกต้องไม่ก่อนวันเข้า
+  const dIn=document.getElementById(`gm-${id}-datein`)?.value||batches[idx].dateIn;
+  const outEl=document.getElementById(`gm-${id}-dateout`);
+  const dOut=outEl?outEl.value:batches[idx].dateOut;
+  if(!dIn) return toast('กรุณาใส่วันที่ไม้เข้าห้อง\nPlease enter the date in','err');
+  if(outEl&&!dOut) return toast('กรุณาใส่วันที่ไม้ออกห้อง\nPlease enter the date out','err');
+  if(dOut&&dOut<dIn) return toast('วันออกอยู่ก่อนวันเข้า — ตรวจวันที่อีกครั้ง\nDate out is before date in — please check','err');
+  if(outEl&&dOut){
+    const dc=daysCheck(daysBetween(dIn,dOut),{...batches[idx],dateIn:dIn,dateOut:dOut});
+    if(dc.lvl==='warn'&&!confirm(`⚠️ ${dc.th}\n${dc.en}\n\nบันทึกต่อหรือไม่? · Save anyway?`)) return;
+  }
+  batches[idx].dateIn=dIn;
+  if(outEl){
+    batches[idx].dateOut=dOut;
+    batches[idx].actualDays=daysBetween(dIn,dOut);
+  }
   (batches[idx].sizes||[]).forEach((s,si)=>{
     GRADES.forEach(g=>{
       const v=parseFloat(document.getElementById(`gm-${id}-${si}-${g.toLowerCase()}`)?.value);
@@ -1185,8 +1387,11 @@ function saveGradeModal(id){
     const cf=parseFloat(document.getElementById(`gm-${id}-${si}-cufin`)?.value);
     s.cufIn=isNaN(cf)?s.cufIn:cf;
   });
-  save(); toast('✅ บันทึกเกรดแล้ว\nGrades saved','ok');
+  save(); toast('✅ บันทึกแล้ว\nSaved','ok');
   closeGradeModal(); renderLog(); renderOverview();
+  const act=document.querySelector('.pane.active')?.id;
+  if(act==='pane-gantt') renderGantt();
+  if(act==='pane-entry-in') renderEntryIn();
 }
 function closeGradeModal(){document.getElementById('grade-modal').style.display='none'}
 
@@ -1209,24 +1414,44 @@ function renderGantt(){
   const td=now.getDate(),tm=now.getMonth(),ty=now.getFullYear();
   const isCurMonth=tm===month&&ty===year;
 
-  let html=`<table class="gtable"><thead><tr>
-    <th class="th-room" rowspan="2">KD</th>
+  let html=`<table class="gtable"><colgroup><col style="width:30px">${'<col>'.repeat(dim)}</colgroup><thead><tr>
+    <th class="th-room">KD</th>
 `;
   for(let d=1;d<=dim;d++) html+=`<th class="th-day ${isCurMonth&&d===td?'tcol':''}">${d}</th>`;
   html+=`</tr></thead><tbody>`;
 
+  const pad=n=>String(n).padStart(2,'0');
+  const todayStr=today();
   for(let r=1;r<=ROOMS;r++){
-    html+=`<tr><td class="td-room">${r}</td>`;
+    const bl=blockedInfo(r);
+    html+=`<tr><td class="td-room ${bl&&!roomBatch(r)?'td-blocked':''}" ${bl?`title="🚫 ${(reasonLabel('block',bl.reason)||['','ใช้งานไม่ได้'])[1]}"`:''}>${r}${bl&&!roomBatch(r)?'<i>🚫</i>':''}</td>`;
     for(let d=1;d<=dim;d++){
-      const cd=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const cd=`${year}-${pad(month+1)}-${pad(d)}`;
       const tc=isCurMonth&&d===td?'tcol':'';
-      const b=batches.find(b=>b.room==r&&b.dateIn<=cd&&(b.status==='drying'||(b.dateOut&&b.dateOut>=cd)));
+      // รอบที่ครอบคลุมวันนี้ — ถ้าวันเปลี่ยนรอบซ้อนกัน เลือกรอบที่เข้าทีหลัง
+      const cands=batches.filter(b=>b.room==r&&b.dateIn&&b.dateIn<=cd&&(b.status==='drying'?true:(b.dateOut&&b.dateOut>=cd)));
+      let b=null;
+      cands.forEach(x=>{ if(!b||x.dateIn>b.dateIn) b=x });
+      if(b&&b.status==='drying'){
+        const eff=effT(b),el=daysBetween(b.dateIn,todayStr);
+        if(daysBetween(b.dateIn,cd)>Math.max(eff,el)) b=null;      // ไม่ระบายเกินช่วงที่วางแผนไว้/ที่อบมาแล้ว
+      }
       if(b){
         const done=b.status==='done';
-        const szs=[...new Set(b.sizes.map(s=>s.size))].join('/');
-        html+=`<td class="gc ${done?'done':'drying'} ${tc}" title="KD${r}|${szs}&quot;|${ds(b.dateIn)}-${ds(b.dateOut||'?')}"><div class="ct">${szs}</div></td>`;
+        const i=daysBetween(b.dateIn,cd);
+        const span=done?Math.max(1,daysBetween(b.dateIn,b.dateOut)):Math.max(1,effT(b));
+        const p=Math.min(1,Math.max(0,i/span));
+        const overdue=!done&&i>effT(b);
+        const hue=done?208:overdue?2:36;
+        const L=Math.round(34+p*38), Sat=done?62:overdue?68:82;
+        const bg=`hsl(${hue} ${Sat}% ${L}%)`;
+        const fg=L<52?'#fff':'#1d2733';
+        const first=i===0?'first':'';
+        const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
+        const stops=maintActive().some(m=>m.type==='stop'&&(!m.room||m.room==r)&&m.date===cd);
+        html+=`<td class="gc ${done?'done':'drying'} ${first} ${tc}" style="background:${bg};color:${fg}" title="KD${r} · ${szs}&quot; · ${ds(b.dateIn)} → ${ds(b.dateOut||'…')} · วันที่ ${i+1}${stops?' · ⏸ หยุดเตา':''}"><div class="ct">${stops?'⏸':(i+1)}</div></td>`;
       } else {
-        html+=`<td class="gc empty ${tc}"></td>`;
+        html+=`<td class="gc empty ${tc} ${bl&&!roomBatch(r)?'blk':''}"></td>`;
       }
     }
     html+=`</tr>`;
@@ -1235,9 +1460,6 @@ function renderGantt(){
   document.getElementById('gantt-wrap').innerHTML=html;
 }
 
-// ══════════════════════════════
-// LOG
-// ══════════════════════════════
 function renderLog(){
   const search=document.getElementById('log-search').value.toLowerCase();
   const fs=document.getElementById('log-fsize').value;
@@ -1253,16 +1475,17 @@ function renderLog(){
   tbody.innerHTML=data.map(b=>{
     const t=calcBatchTotals(b);
     const pAB=t.pctAB;
-    const diff=b.actualDays!=null?b.actualDays-b.targetDays:null;
-    const mok=b.moisture==null||b.moisture<=7;
+    const diff=b.actualDays!=null?b.actualDays-effT(b):null;
+    const mok=b.moisture==null||b.moisture<=MOIST_MAX;
+    const dcl=b.status==='done'?daysCheck(b.actualDays,b):{lvl:null};
     const szs=[...new Set((b.sizes||[]).map(s=>s.size))].join('/');
     return `<tr>
       <td class="mono">${b.id}</td>
       <td style="font-weight:700">${b.room}</td>
       <td class="mono">${ds(b.dateIn)}</td>
       <td class="mono">${ds(b.dateOut)}</td>
-      <td class="mono">${b.actualDays!=null?b.actualDays:'—'}</td>
-      <td class="mono">${b.targetDays}</td>
+      <td class="mono ${dcl.lvl==='err'?'bad':dcl.lvl?'warn2':''}" ${dcl.lvl?`title="${dcl.th} / ${dcl.en}"`:''}>${b.actualDays!=null?b.actualDays:'—'}${dcl.lvl?' ⚠️':''}</td>
+      <td class="mono">${effT(b)}</td>
       <td class="mono ${diff>0?'bad':diff<0?'good':''}">${diff!=null?(diff>0?'+'+diff:diff<0?diff:'✅'):'—'}</td>
       <td class="mono">${szs}"</td>
       <td class="mono">${fn(t.cufIn)}</td>
@@ -1277,7 +1500,7 @@ function renderLog(){
       <td class="mono">${b.pallet||'—'}</td>
       <td>${b.status==='drying'?'<span class="badge b-drying">กำลังอบ · Drying</span>':(mok?'<span class="badge b-ok">✅ ผ่าน · OK</span>':'<span class="badge b-warn">⚠️ ชื้นสูง · Wet</span>')}</td>
       <td style="font-size:10px;color:var(--text2);max-width:100px;overflow:hidden;text-overflow:ellipsis">${b.note||'—'}</td>
-      <td><button class="btn btn-ghost btn-sm" onclick="openGradeModalForBatch(getBatch(${b.id}))">✏️</button></td>
+      <td class="ro-hide"><button class="btn btn-ghost btn-sm" onclick="openGradeModalForBatch(getBatch(${b.id}))">✏️</button></td>
     </tr>`;
   }).join('');
 }
@@ -1308,6 +1531,7 @@ function exportJSON(){
   toast('⬇️ Backup JSON แล้ว\nBackup downloaded','ok');
 }
 function importJSON(e){
+  if(roBlock()){e.target.value='';return}
   const f=e.target.files[0]; if(!f) return;
   const reader=new FileReader();
   reader.onload=ev=>{
@@ -1325,7 +1549,7 @@ function importJSON(e){
         saveM(true); renderMaint();
       }
       fixDupIds(batches);
-      nextId=batches.length?Math.max(...batches.map(b=>b.id))+1:1;
+      nextId=maxBatchId()+1;
       save(); renderOverview(); renderLog();
       toast('✅ Import สำเร็จ '+batches.length+' รอบ\nImported '+batches.length+' batches','ok');
     }catch{toast('❌ ไฟล์ไม่ถูกต้อง\nInvalid file','err')}
@@ -1361,6 +1585,18 @@ function setMType(type, el){
   mCurrentType = type;
   document.querySelectorAll('.maint-type-btn[id^="mtype-"]').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
+  const sel=document.getElementById('m-reason');
+  sel.innerHTML=(REASONS[type]||[]).map(r=>`<option value="${r[0]}">${r[1]} · ${r[2]}</option>`).join('');
+  updateMForm();
+}
+function updateMForm(){
+  const t=mCurrentType, hasR=!!REASONS[t];
+  document.getElementById('m-reason-field').style.display=hasR?'':'none';
+  document.getElementById('m-days-field').style.display=t==='stop'?'':'none';
+  const rl=document.getElementById('m-room-label');
+  rl.innerHTML=t==='block'?'ห้อง KD *<span class="en">Room (required)</span>':t==='stop'?'ห้อง KD (ว่าง = หยุดเตาทั้งโรงงาน)<span class="en">Room (blank = all rooms)</span>':'ห้อง KD (ถ้ามี)<span class="en">Room (optional)</span>';
+  const other=hasR&&document.getElementById('m-reason').value==='other';
+  document.getElementById('m-title-label').innerHTML=(hasR&&!other)?'หัวข้อ (ไม่บังคับ)<span class="en">Title (optional)</span>':'หัวข้อ *<span class="en">Title</span>';
 }
 function setMFilter(filter, el){
   mCurrentFilter = filter;
@@ -1403,25 +1639,47 @@ function renderPhotoPreview(){
 function removePhoto(i){ mPendingPhotos.splice(i,1); renderPhotoPreview(); }
 
 function saveMaint(){
+  if(roBlock()) return;
   const date = document.getElementById('m-date').value;
-  const title = document.getElementById('m-title').value.trim();
+  let title = document.getElementById('m-title').value.trim();
   const room = document.getElementById('m-room').value;
+  const hasR = !!REASONS[mCurrentType];
+  const reason = hasR ? document.getElementById('m-reason').value : null;
+  let days = null;
   const person = document.getElementById('m-person').value.trim();
   const status = document.getElementById('m-status').value;
   const desc = document.getElementById('m-desc').value.trim();
 
   if(!date) return toast('กรุณาเลือกวันที่\nPlease select a date','err');
+  if(hasR){
+    const rl=reasonLabel(mCurrentType,reason);
+    if(reason==='other'&&!title) return toast('กรุณาระบุสาเหตุ (ช่องหัวข้อ)\nPlease describe the reason in the title','err');
+    if(!title) title=rl[1];
+  }
   if(!title) return toast('กรุณาใส่หัวข้อ\nPlease enter a title','err');
+  if(mCurrentType==='block'){
+    if(!room) return toast('กรุณาเลือกห้องที่ใช้งานไม่ได้\nPlease choose the unavailable room','err');
+    if(roomBatch(parseInt(room))&&!confirm(`KD ${room} มีไม้กำลังอบอยู่ — ยืนยันตั้งเป็นห้องใช้งานไม่ได้?\nKD ${room} has a drying batch — mark unavailable anyway?`)) return;
+    if(blockedInfo(parseInt(room))) return toast(`KD ${room} ถูกตั้งเป็นใช้งานไม่ได้อยู่แล้ว\nKD ${room} is already marked unavailable`,'err');
+  }
+  if(mCurrentType==='stop'){
+    days=parseInt(document.getElementById('m-days').value);
+    if(isNaN(days)||days<1) return toast('จำนวนวันหยุดเตาต้องเป็นอย่างน้อย 1 วัน\nFurnace stop must be at least 1 day','err');
+    if(days>14) return toast('หยุดเตาเกิน 14 วัน — ตรวจตัวเลขอีกครั้ง\nMore than 14 days — please check','err');
+    if(daysBetween(today(),date)>0) return toast('วันที่หยุดเตาอยู่ในอนาคต\nFurnace stop date is in the future','err');
+    const dup=maintActive().find(m=>m.type==='stop'&&m.date===date&&(m.room||'')==(room||''));
+    if(dup&&!confirm('มีรายการหยุดเตาวันเดียวกัน/ห้องเดียวกันแล้ว — บันทึกซ้ำหรือไม่?\nA stop for the same day/room exists — save anyway?')) return;
+  }
 
   const rec = {
-    id: mNextId++, type: mCurrentType, date, title, room: room||null,
+    id: mNextId++, type: mCurrentType, date, title, room: room?parseInt(room):null, reason, days,
     person, status, desc, photos: [...mPendingPhotos],
     createdAt: new Date().toISOString()
   };
   maints.unshift(rec);
   if(!saveM()){ maints.shift(); mNextId--; return; }
-  toast(`✅ บันทึกแล้ว: ${title}\nSaved: ${title}`,'ok');
-  clearMaintForm(); renderMaint();
+  toast(`✅ บันทึกแล้ว: ${title}${rec.type==='stop'?` (+${days} วันอบ)`:''}\nSaved: ${title}${rec.type==='stop'?` (+${days} drying day${days>1?'s':''})`:''}`,'ok');
+  clearMaintForm(); renderMaint(); renderOverview();
 }
 
 function clearMaintForm(){
@@ -1431,6 +1689,7 @@ function clearMaintForm(){
   document.getElementById('m-person').value = '';
   document.getElementById('m-status').value = 'open';
   document.getElementById('m-desc').value = '';
+  const dd=document.getElementById('m-days'); if(dd) dd.value=1;
   mPendingPhotos = [];
   renderPhotoPreview();
 }
@@ -1441,6 +1700,8 @@ function renderMaint(){
   if(mCurrentFilter==='repair') data=data.filter(m=>m.type==='repair');
   else if(mCurrentFilter==='mold') data=data.filter(m=>m.type==='mold');
   else if(mCurrentFilter==='other') data=data.filter(m=>m.type==='other');
+  else if(mCurrentFilter==='stop') data=data.filter(m=>m.type==='stop');
+  else if(mCurrentFilter==='block') data=data.filter(m=>m.type==='block');
   else if(mCurrentFilter==='open') data=data.filter(m=>m.status==='open');
   if(search) data=data.filter(m=>
     m.title.toLowerCase().includes(search)||
@@ -1456,8 +1717,8 @@ function renderMaint(){
   if(!el) return;
   if(!data.length){ el.innerHTML='<div class="empty-state">ไม่พบรายการ<span class="en">No records found</span></div>'; return; }
 
-  const typeLabel = {repair:'🔧 ซ่อมบำรุง · Repair', mold:'🍄 ไม้ขึ้นรา · Mold', other:'📌 อื่นๆ · Other'};
-  const typeCls   = {repair:'type-repair', mold:'type-mold', other:'type-other'};
+  const typeLabel = {repair:'🔧 ซ่อมบำรุง · Repair', mold:'🍄 ไม้ขึ้นรา · Mold', other:'📌 อื่นๆ · Other', stop:'⏸ หยุดเตา · Furnace stop', block:'🚫 ห้องใช้งานไม่ได้ · Unavailable'};
+  const typeCls   = {repair:'type-repair', mold:'type-mold', other:'type-other', stop:'type-stop', block:'type-block'};
 
   el.innerHTML = data.map(m=>`
     <div class="maint-card" id="mc-${m.id}">
@@ -1465,13 +1726,14 @@ function renderMaint(){
         <div>
           <span class="type-badge ${typeCls[m.type]}">${typeLabel[m.type]}</span>
           <span class="type-badge ${m.status==='done'?'status-done':'status-open'}" style="margin-left:4px">
-            ${m.status==='done'?'✅ เสร็จแล้ว · Done':'🔴 รอดำเนินการ · Open'}
+            ${m.type==='block'?(m.status==='done'?'✅ เปิดใช้แล้ว · Reopened':'🔴 ใช้งานไม่ได้ · Unavailable'):m.status==='done'?'✅ เสร็จแล้ว · Done':'🔴 รอดำเนินการ · Open'}
           </span>
           <div class="mc-title" style="margin-top:6px">${m.title}</div>
+          ${m.type==='stop'?`<div class="mc-reason">⏸ หยุด <b>${m.days||1}</b> วัน → เพิ่มวันอบ +${m.days||1} · ${m.room?'KD '+m.room:'ทั้งโรงงาน (all rooms)'}</div>`:''}
         </div>
         <div style="display:flex;gap:6px;flex-shrink:0">
-          ${m.status==='open'?`<button class="btn btn-success btn-sm" onclick="toggleMaintStatus(${m.id},event)">✅ เสร็จ · Done</button>`:''}
-          <button class="btn btn-ghost btn-sm" onclick="deleteMaint(${m.id},event)" title="ลบ · Delete" style="color:var(--red);border-color:var(--red)">🗑</button>
+          ${m.status==='open'?`<button class="btn btn-success btn-sm ro-hide" onclick="toggleMaintStatus(${m.id},event)">${m.type==='block'?'✅ เปิดใช้ห้อง · Reopen':'✅ เสร็จ · Done'}</button>`:''}
+          <button class="btn btn-ghost btn-sm ro-hide" onclick="deleteMaint(${m.id},event)" title="ลบ · Delete" style="color:var(--red);border-color:var(--red)">🗑</button>
         </div>
       </div>
       <div class="mc-meta">
@@ -1489,19 +1751,27 @@ function renderMaint(){
 
 function toggleMaintStatus(id, e){
   e.stopPropagation();
+  if(roBlock()) return;
   const idx = maints.findIndex(m=>m.id===id);
   if(idx<0) return;
   maints[idx].status = maints[idx].status==='open'?'done':'open';
-  saveM(); renderMaint();
+  saveM(); renderMaint(); renderOverview();
   toast('✅ อัปเดตสถานะแล้ว\nStatus updated','ok');
+}
+function reopenRoom(id){
+  if(roBlock()) return;
+  const m=maints.find(x=>x.id===id); if(!m) return;
+  m.status='done'; saveM(); closeRoomModal(); renderOverview(); renderMaint();
+  toast('✅ เปิดใช้ห้องแล้ว\nRoom reopened','ok');
 }
 function deleteMaint(id, e){
   e.stopPropagation();
+  if(roBlock()) return;
   if(!confirm('ลบรายการนี้?\nDelete this record?')) return;
   // ไม่ลบจริง แต่ทำเครื่องหมาย deleted เพื่อให้ซิงก์ไปเครื่องอื่นได้
   const dm = maints.find(m=>m.id===id);
   if(dm){ dm.deleted = true; dm.photos = []; }
-  saveM(); renderMaint();
+  saveM(); renderMaint(); renderOverview();
   toast('🗑 ลบแล้ว\nDeleted','ok');
 }
 
@@ -1535,6 +1805,7 @@ switchTab = function(tab, el){
 // QUICK ENTRY (text parser — no API)
 // ══════════════════════════════
 function openAIModal(){
+  if(roBlock()) return;
   document.getElementById('ai-modal').style.display='flex';
   document.getElementById('ai-result').style.display='none';
   document.getElementById('ai-text-input').value='';
@@ -1601,19 +1872,27 @@ function runTextParse(){
   renderParseResult(rooms);
 }
 
+// ── รอบซ้ำ: ห้องเดียวกัน + วันเข้าเดียวกัน + ขนาด/เกรดเหมือนกันทุกตัว ──
+function sizesSig(sizes){
+  return (sizes||[]).map(s=>`${s.size}:${+s.ab||0},${+s.abc||0},${+s.bc||0},${+s.c||0}`).sort().join(';');
+}
+function batchKey(b){ return `${b.room}|${b.dateIn||''}|${sizesSig(b.sizes)}` }
+
 function renderParseResult(rooms){
   const el = document.getElementById('ai-result');
   const list = document.getElementById('ai-result-list');
   const dryingRooms = new Set(getDrying().map(b=>b.room));
+  const existingKeys = new Set(batches.map(batchKey));
 
   list.innerHTML = rooms.map((r,i)=>{
-    const conflict = dryingRooms.has(r.room);
+    const dup = existingKeys.has(batchKey({room:r.room,dateIn:r.date||today(),sizes:r.sizes}));
+    const conflict = dryingRooms.has(r.room) || dup;
     return `<div class="ai-room-card" style="${conflict?'border-color:var(--red)':''}">
       <div class="ar-head">
         <input type="checkbox" id="ai-chk-${i}" ${conflict?'':'checked'} style="width:16px;height:16px;accent-color:var(--green)">
         <span style="font-weight:700;color:${conflict?'var(--red)':'var(--yellow)'}">KD ${r.room}</span>
         <span style="font-size:11px;color:var(--text2)">📅 ${ds(r.date||today())}</span>
-        ${conflict?'<span style="font-size:10px;color:var(--red)">⚠️ กำลังอบอยู่ · already drying</span>':''}
+        ${dup?'<span style="font-size:10px;color:var(--red)">⚠️ มีรอบนี้บันทึกไว้แล้ว · duplicate</span>':(conflict?'<span style="font-size:10px;color:var(--red)">⚠️ กำลังอบอยู่ · already drying</span>':'')}
       </div>
       <div class="ar-sizes">
         ${r.sizes.map(s=>{
@@ -1640,11 +1919,13 @@ function renderParseResult(rooms){
 }
 
 function confirmImport(rooms){
-  let count=0;
+  if(roBlock()) return;
+  let count=0, dupSkipped=0, dryingSkipped=0;
   rooms.forEach((r,i)=>{
     const chk=document.getElementById('ai-chk-'+i);
     if(!chk||!chk.checked) return;
-    if(getDrying().some(b=>b.room===r.room)) return;
+    if(batches.some(x=>batchKey(x)===batchKey({room:r.room,dateIn:r.date||today(),sizes:r.sizes}))){dupSkipped++;return}
+    if(getDrying().some(b=>b.room===r.room)){dryingSkipped++;return}
     const cuf=parseFloat(document.getElementById('ai-cuf-'+i)?.value)||0;
     const note=document.getElementById('ai-note-'+i)?.value||'';
     const szCount=r.sizes.length;
@@ -1658,10 +1939,85 @@ function confirmImport(rooms){
     };
     batches.push(b); count++;
   });
-  if(!count){ toast('ไม่มีห้องที่เลือก\nNo room selected','err'); return; }
+  if(dupSkipped) toast(`⚠️ ข้าม ${dupSkipped} รายการที่ซ้ำกับรอบที่บันทึกไว้แล้ว\nSkipped ${dupSkipped} duplicate(s) already saved`,'err');
+  if(dryingSkipped) toast(`⚠️ ข้าม ${dryingSkipped} ห้องที่กำลังอบอยู่\nSkipped ${dryingSkipped} room(s) already drying`,'err');
+  if(!count){ if(!dupSkipped&&!dryingSkipped) toast('ไม่มีห้องที่เลือก\nNo room selected','err'); return; }
   save();
   toast(`✅ บันทึก ${count} ห้องแล้ว\nSaved ${count} room(s)`,'ok');
   closeAIModal(); renderEntryIn(); renderOverview();
+}
+
+// ══════════════════════════════
+// DUPLICATE FINDER
+// ══════════════════════════════
+function findDupGroups(){
+  const map={};
+  batches.forEach(b=>{(map[batchKey(b)]=map[batchKey(b)]||[]).push(b)});
+  return Object.values(map).filter(g=>g.length>1);
+}
+// รอบที่ควรเก็บไว้: ที่ข้อมูลครบกว่า (ออกแล้ว/มีวันออก/มีความชื้น) ถ้าเท่ากันเก็บเลข id ต่ำสุด
+function keepScore(b){ return (b.status==='done'?4:0)+(b.dateOut?2:0)+(b.moisture!=null?1:0) }
+function pickKeeper(g){ return [...g].sort((a,b)=>keepScore(b)-keepScore(a)||a.id-b.id)[0] }
+
+function openDupModal(){
+  const groups=findDupGroups();
+  const el=document.getElementById('dup-modal-content');
+  if(!groups.length){
+    el.innerHTML=`<div class="modal-title">🧹 ตรวจรอบซ้ำ<span class="en">Duplicate check</span></div>
+      <div class="empty-state">ไม่พบรอบซ้ำ ✅<span class="en">No duplicates found</span></div>
+      <div class="btn-row"><button class="btn btn-ghost" onclick="closeDupModal()">ปิด · Close</button></div>`;
+  } else {
+    const total=groups.reduce((s,g)=>s+g.length-1,0);
+    el.innerHTML=`<div class="modal-title">🧹 พบรอบซ้ำ ${total} รอบ<span class="en">${total} duplicate batch(es) found</span></div>
+      <div class="modal-help">รอบซ้ำ = ห้องเดียวกัน วันเข้าเดียวกัน ขนาดและเกรดเหมือนกันทุกตัว ระบบติ๊ก “ลบ” ไว้ให้ที่ข้อมูลน้อยกว่า ตรวจก่อนกดยืนยัน
+        <span class="en">Same room, date in, sizes and grades. Pre-ticked = the less complete copy. Review before confirming.</span></div>`
+    + groups.map(g=>{
+      const keep=pickKeeper(g);
+      return `<div class="ai-room-card"><div class="ar-head">
+          <span style="font-weight:700;color:var(--yellow)">KD ${g[0].room}</span>
+          <span style="font-size:11px;color:var(--text2)">เข้า ${ds(g[0].dateIn)} · ${(g[0].sizes||[]).map(s=>s.size).join('/')}</span></div>
+        ${g.map(b=>`<label style="display:flex;gap:8px;align-items:center;font-size:12px;padding:3px 0;cursor:pointer">
+          <input type="checkbox" class="dup-chk" data-id="${b.id}" data-grp="${g[0].id}" ${b.id===keep.id?'':'checked'} style="width:16px;height:16px;accent-color:var(--red)">
+          <span class="mono">#${b.id}</span>
+          <span>${b.status==='done'?'✅ ออกแล้ว · Done '+ds(b.dateOut):'🔥 กำลังอบ · Drying'}</span>
+          <span style="color:var(--text3)">${b.moisture!=null?'ชื้น '+b.moisture+'%':''}</span>
+          <span style="margin-left:auto;font-size:10px;color:${b.id===keep.id?'var(--green)':'var(--red)'}">${b.id===keep.id?'เก็บไว้ · keep':'ลบ · delete'}</span>
+        </label>`).join('')}</div>`;
+    }).join('')
+    + `<div class="btn-row">
+        <button class="btn btn-danger" onclick="applyDupDelete()">🗑 ลบที่ติ๊ก · Delete ticked</button>
+        <button class="btn btn-ghost" onclick="closeDupModal()">ยกเลิก · Cancel</button></div>`;
+  }
+  document.getElementById('dup-modal').style.display='flex';
+}
+function closeDupModal(){document.getElementById('dup-modal').style.display='none'}
+
+function applyDupDelete(){
+  if(roBlock()) return;
+  const checks=[...document.querySelectorAll('.dup-chk')];
+  // กันพลาด: ถ้าติ๊กลบครบทั้งกลุ่ม ให้เก็บรอบที่ข้อมูลครบสุดไว้หนึ่งรอบ
+  const byGrp={};
+  checks.forEach(c=>{(byGrp[c.dataset.grp]=byGrp[c.dataset.grp]||[]).push(c)});
+  Object.values(byGrp).forEach(cs=>{
+    if(cs.every(c=>c.checked)){
+      const keep=pickKeeper(cs.map(c=>getBatch(+c.dataset.id)));
+      cs.find(c=>+c.dataset.id===keep.id).checked=false;
+    }
+  });
+  const ids=checks.filter(c=>c.checked).map(c=>+c.dataset.id);
+  if(!ids.length) return toast('ยังไม่ได้ติ๊กรอบที่จะลบ\nNothing ticked','err');
+  if(!confirm(`ลบ ${ids.length} รอบที่ซ้ำ?\nDelete ${ids.length} duplicate batch(es)?`)) return;
+  ids.forEach(id=>{
+    const b=getBatch(id); if(!b) return;
+    batches=batches.filter(x=>x.uid!==b.uid);
+    // tombstone ขนาดเล็ก: ใช้ซิงก์การลบไปเครื่องอื่นและ Sheet
+    batchTomb.push({uid:b.uid,id:b.id,room:b.room,status:'deleted',deleted:true,sizes:[],createdAt:b.createdAt});
+  });
+  save();
+  closeDupModal(); renderLog(); renderOverview();
+  const act=document.querySelector('.pane.active')?.id;
+  if(act==='pane-gantt') renderGantt();
+  toast(`🗑 ลบรอบซ้ำ ${ids.length} รอบแล้ว\nRemoved ${ids.length} duplicate(s)`,'ok');
 }
 
 // ══════════════════════════════
@@ -1680,6 +2036,13 @@ function toast(msg,type='ok'){
 // ══════════════════════════════
 // CLOUD SYNC (Google Apps Script → Google Sheets + Drive)
 // ══════════════════════════════
+function isRO(){const c=getCfg();return !!(c.ro&&c.url&&c.token)}
+function roBlock(){
+  if(!isRO()) return false;
+  toast('โหมดดูอย่างเดียว แก้ไขข้อมูลไม่ได้\nView-only mode — editing is disabled','err');
+  return true;
+}
+function applyRoClass(){document.body.classList.toggle('readonly',isRO())}
 function getCfg(){try{return JSON.parse(localStorage.getItem('kd_sync')||'{}')}catch{return{}}}
 function setCfg(c){try{localStorage.setItem('kd_sync',JSON.stringify(c))}catch{}}
 let syncing=false, syncAgain=false, syncTimer=null;
@@ -1688,8 +2051,10 @@ function hhmm(ms){const d=new Date(ms);return String(d.getHours()).padStart(2,'0
 function setSyncStatus(txt){const el=document.getElementById('hd-sync');if(el)el.textContent=txt}
 function updateSyncLabel(){
   const c=getCfg();
+  applyRoClass();
+  const eye=isRO()?'👁 ':'';
   if(!c.url||!c.token) setSyncStatus('☁️ ยังไม่ตั้งค่า · Not set up');
-  else setSyncStatus(c.last?'☁️ ซิงก์แล้ว · Synced '+hhmm(c.last):'☁️ รอซิงก์ · Pending');
+  else setSyncStatus(eye+(c.last?'☁️ ซิงก์แล้ว · Synced '+hhmm(c.last):'☁️ รอซิงก์ · Pending'));
 }
 function scheduleSync(delay=2500){
   const c=getCfg(); if(!c.url||!c.token) return;
@@ -1699,12 +2064,12 @@ function scheduleSync(delay=2500){
 
 function rebuildSnap(){
   SNAP.batches={};SNAP.maints={};
-  batches.forEach(o=>{if(o.uid){const {updatedAt,...r}=o;SNAP.batches[o.uid]=JSON.stringify(r)}});
+  batches.concat(batchTomb).forEach(o=>{if(o.uid){const {updatedAt,...r}=o;SNAP.batches[o.uid]=JSON.stringify(r)}});
   maints.forEach(o=>{if(o.uid){const {updatedAt,...r}=o;SNAP.maints[o.uid]=JSON.stringify(r)}});
 }
 function initMeta(){
   rebuildSnap();
-  if(batches.some(o=>!o.uid||!o.updatedAt)) save(true);
+  if(batches.some(o=>!o.uid||!o.updatedAt)||batchTomb.some(o=>!o.uid||!o.updatedAt)) save(true);
   if(maints.some(o=>!o.uid||!o.updatedAt)) saveM(true);
 }
 
@@ -1731,24 +2096,39 @@ function fixDupIds(list){
 }
 
 function applyMerged(d){
-  const mb=mergeLists(batches,d.batches||[]);
+  const mb=mergeLists(batches.concat(batchTomb),d.batches||[]);
   const mm=mergeLists(maints,d.maints||[]);
-  batches=mb.list;
+  batches=mb.list.filter(o=>!o.deleted);
+  batchTomb=mb.list.filter(o=>o.deleted);
   maints=mm.list;
   rebuildSnap();                       // ทุกรายการ ณ ตอนนี้ถือว่า "ยังไม่เปลี่ยน"
   const c1=fixDupIds(batches), c2=fixDupIds(maints);   // ถ้าแก้เลขซ้ำ save() จะประทับเวลาใหม่ให้เอง
   batches.sort((a,b)=>a.id-b.id);      // เรียงหลังแก้เลขซ้ำ
   maints.sort((a,b)=>b.id-a.id);
-  nextId=batches.length?Math.max(...batches.map(b=>b.id))+1:1;
+  nextId=maxBatchId()+1;
   mNextId=maints.length?Math.max(...maints.map(m=>m.id))+1:1;
   save(true); saveM(true);
+  rerenderActive();
+  return mb.localWon||mm.localWon||c1||c2;
+}
+function rerenderActive(){
   const act=document.querySelector('.pane.active')?.id;
   renderOverview(); renderMaint();
   if(act==='pane-entry-in') renderEntryIn();
   if(act==='pane-entry-out') renderOutRooms();
   if(act==='pane-gantt') renderGantt();
   if(act==='pane-log') renderLog();
-  return mb.localWon||mm.localWon||c1||c2;
+}
+// โหมดดูอย่างเดียว: ใช้ข้อมูลจากเซิร์ฟเวอร์ทั้งชุด ไม่ส่งอะไรขึ้นไป
+function applyReadOnly(d){
+  batches=(d.batches||[]).filter(o=>!o.deleted).sort((a,b)=>a.id-b.id);
+  batchTomb=[];
+  maints=(d.maints||[]).sort((a,b)=>b.id-a.id);
+  rebuildSnap();
+  nextId=maxBatchId()+1;
+  mNextId=maints.length?Math.max(...maints.map(m=>m.id))+1:1;
+  save(true); saveM(true);
+  rerenderActive();
 }
 
 async function syncNow(manual){
@@ -1762,14 +2142,17 @@ async function syncNow(manual){
   let ok=false;
   try{
     // ไม่ตั้ง header เอง → เป็น "simple request" ไม่ติด CORS preflight ของ Apps Script
-    const res=await fetch(c.url,{method:'POST',body:JSON.stringify({token:c.token,batches,maints})});
+    const ro=isRO();
+    const body=ro?{token:c.token,mode:'read'}:{token:c.token,batches:batches.concat(batchTomb),maints};
+    const res=await fetch(c.url,{method:'POST',body:JSON.stringify(body)});
     const txt=await res.text();
     let d;
     try{d=JSON.parse(txt)}catch{throw new Error('ตอบกลับไม่ถูกต้อง — ตรวจ URL และตั้ง Deploy ให้ "ทุกคน" เข้าถึงได้ / Invalid response — check the URL and set deploy access to Anyone')}
     if(!d.ok) throw new Error(d.error||'unknown');
-    const again=applyMerged(d);
+    let again=false;
+    if(ro) applyReadOnly(d); else again=applyMerged(d);
     c.last=Date.now();setCfg(c);
-    setSyncStatus('☁️ ซิงก์แล้ว · Synced '+hhmm(c.last));
+    setSyncStatus((isRO()?'👁 ':'')+'☁️ ซิงก์แล้ว · Synced '+hhmm(c.last));
     if(manual) toast('☁️ ซิงก์สำเร็จ\nSynced','ok');
     if(again) syncAgain=true;
     ok=true;
@@ -1787,6 +2170,7 @@ function openSyncModal(){
   const c=getCfg();
   document.getElementById('sync-url').value=c.url||'';
   document.getElementById('sync-token').value=c.token||'';
+  document.getElementById('sync-ro').checked=!!c.ro;
   document.getElementById('sync-last').textContent=c.last?'ซิงก์ล่าสุด · Last sync: '+new Date(c.last).toLocaleString('th-TH'):'ยังไม่เคยซิงก์ · Never synced';
   document.getElementById('sync-modal').style.display='flex';
 }
@@ -1797,7 +2181,7 @@ function saveSyncCfg(){
   if(!/^https:\/\/script\.google\.com\/.+\/exec/.test(url)) return toast('URL ต้องขึ้นต้นด้วย https://script.google.com/ และลงท้าย /exec\nURL must start with https://script.google.com/ and end with /exec','err');
   if(!token) return toast('กรุณาใส่รหัส (TOKEN)\nPlease enter the TOKEN','err');
   const old=getCfg();
-  setCfg({url,token,last:old.url===url?old.last:null});
+  setCfg({url,token,ro:document.getElementById('sync-ro').checked,last:old.url===url?old.last:null});
   closeSyncModal();updateSyncLabel();syncNow(true);
 }
 function clearSyncCfg(){
@@ -1818,6 +2202,7 @@ document.getElementById('hd-date').innerHTML=
 addSizeRow();
 initMeta();
 renderOverview();
+setMType("repair",document.getElementById("mtype-repair"));
 clearMaintForm();
 updateSyncLabel();
 scheduleSync(1200);
